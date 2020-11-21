@@ -1,0 +1,23 @@
+{
+  "name": "DiscordBot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chasen48/DiscordBot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chasen48/DiscordBot/issues"
+  },
+  "homepage": "https://github.com/chasen48/DiscordBot#readme",
+  "dependencies": {
+    "discord.js": "^12.4.1"
+  }
+}
