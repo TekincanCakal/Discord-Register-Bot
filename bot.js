@@ -51,6 +51,20 @@ client.on("message", message =>
     member.roles.remove(unregisterRole).catch(console.error);
     message.delete({ timeout: 1000 });
     console.log(userId + " idli kişi kayıt oldu!");
+    message.channel.fetchMessages().then(async messages => 
+    {
+    	for (const message of messages.array().reverse())
+	{
+		for(var i = 0; i < message.embeds.length; i++) 
+		{
+        		if(message.embeds[i].title === member.id) 
+			{
+            			message.channel.send("Detected");
+           		 	break;
+    			}
+		}
+	}
+     });
   }
 });
 client.on("guildMemberAdd", member =>
@@ -58,6 +72,7 @@ client.on("guildMemberAdd", member =>
   var memberCount = guild.members.cache.filter(member => !member.user.bot).size;
   const welcomeMessage = new Discord.MessageEmbed()
 	.setColor('#0099ff')
+  	.setTitle(member.user.id)
 	.setDescription("**Sunucuya Yeni Bir Üye Geldi!**")
 	.setThumbnail(member.user.avatarURL())
 	.addFields(
