@@ -7,7 +7,7 @@ var unregisterRole;
 var registermanRole;
 client.on('ready', () =>
 {
-  console.log("The bot is logged in xdd");
+  console.log("Bot enabled");
   client.user.setUsername("Nyän");
   guild = client.guilds.cache.get("773638840002543618");//773638840002543618
   manRole = guild.roles.cache.get("773852113477435393");//773852113477435393
@@ -48,6 +48,7 @@ client.on("message", message =>
     }
     member.roles.remove(unregisterRole).catch(console.error);
     message.delete({ timeout: 1000 });
+    console.log(userId + " idli kişi kayıt oldu!");
   }
 });
 client.on("guildMemberAdd", member =>
@@ -62,8 +63,8 @@ client.on("guildMemberAdd", member =>
     { name: '** **', value: "Seninle Birlikte** " + memberCount + "** Kişi Olduk! **(♡°▽°♡)**"},
     { name: '** **', value: "Kullanıcı ID>** " + member.id + "**"},
     { name: '** **', value: "Lütfen Yetkili Birini Etiketleyip  **İsim** ve **Yaşınızı** Yazınız."},
-    { name: '** **', value: womanRole.toString() + " Rolünü Almak İçin **SES TEYİT** Veremeniz zorunludur."},//<:kedy:779726859013324860>
-    { name: '** **', value: "**Kayıt Olma isteğiniz Kayıt Sorumlusuna iletildi.**"},//<02smug:779731824468951060>
+    { name: '** **', value: womanRole.toString() + " Rolünü Almak İçin **SES TEYİT** Veremeniz zorunludur."},
+    { name: '** **', value: "**Kayıt Olma isteğiniz Kayıt Sorumlusuna iletildi.**"},
     { name: '** **', value: "**Kayıt Durumu; **<:x:779684693246607371>"}
 	)
 	.setTimestamp();
