@@ -29,7 +29,7 @@ client.on("message", message =>
     var userId = args[1].replace("<","").replace(">","").replace("@", "").replace("!", "");
     if(args.length !== 4)
     {
-      message.channel.send("!(erkek/kız) @tagSomeone isim yaş");
+      message.channel.send("!e @tagSomeone isim yaş | !k @tagSomeone isim yaş");
       return;
     }
     var member = message.guild.members.cache.get(userId);
@@ -61,7 +61,7 @@ client.on("guildMemberAdd", member =>
 	.setDescription("**Sunucuya Yeni Bir Üye Geldi!**")
 	.setThumbnail(member.user.avatarURL())
 	.addFields(
-		{ name: '** **', value: member.toString() + " **Hepimiz Seni Bekliyorduk.**"},
+    { name: '** **', value: member.toString() + "** Seni Bekliyorduk.**"},
     { name: '** **', value: "Seninle Birlikte** " + memberCount + "** Kişi Olduk! **(♡°▽°♡)**"},
     { name: '** **', value: "Kullanıcı ID>** " + member.id + "**"},
     { name: '** **', value: "Lütfen Yetkili Birini Etiketleyip  **İsim** ve **Yaşınızı** Yazınız."},
