@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chasen48/DiscordBot.git"
+    "url": "git+https://github.com/chasen48/DiscordBotTest.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/chasen48/DiscordBot/issues"
+    "url": "https://github.com/chasen48/DiscordBotTest/issues"
   },
-  "homepage": "https://github.com/chasen48/DiscordBot#readme",
+  "homepage": "https://github.com/chasen48/DiscordBotTest#readme",
   "dependencies": {
     "discord.js": "^12.4.1"
   }

@@ -1,19 +1,21 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
-client.login("NzQ3ODc1ODE5NzgyOTMwNDYy.X0VPog.kFEWtSaN0UH6saxySI7qqCJvGU8");//NzQ3ODc1ODE5NzgyOTMwNDYy.X0VPog.kFEWtSaN0UH6saxySI7qqCJvGU8
+client.login("NzQ3ODc1ODE5NzgyOTMwNDYy.X0VPog.kFEWtSaN0UH6saxySI7qqCJvGU8");
 var guild;
 var manRole, womanRole;
 var unregisterRole;
 var registermanRole;
+var registerChannel;
 client.on('ready', () =>
 {
   console.log("Bot enabled");
   client.user.setUsername("Nyän");
-  guild = client.guilds.cache.get("773638840002543618");//773638840002543618
-  manRole = guild.roles.cache.get("773852113477435393");//773852113477435393
-  womanRole = guild.roles.cache.get("773852330159243274");//773852330159243274
-  unregisterRole = guild.roles.cache.get("773853246090903563");//773853246090903563
+  guild = client.guilds.cache.get("773638840002543618");
+  manRole = guild.roles.cache.get("773852113477435393");
+  womanRole = guild.roles.cache.get("773852330159243274");
+  unregisterRole = guild.roles.cache.get("773853246090903563");
   registermanRole = guild.roles.cache.get("773854774947872769");
+  registerChannel =  guild.channels.cache.get("773670491285487656");
 });
 client.on("message", message =>
 {
@@ -21,7 +23,7 @@ client.on("message", message =>
     return;
   if(!(message.member.roles.cache.has("773854774947872769") || message.member.roles.cache.has("773925340576874496") || message.member.roles.cache.has("773991096530632726")))
     return;
-  if(message.channel.id === "773670491285487656" && (message.content.startsWith("!e") || message.content.startsWith("!k")))//773670491285487656
+  if(message.channel.id === registerChannel.id && (message.content.startsWith("!e") || message.content.startsWith("!k")))
   {
     var args = message.content.split(" ");
     var userId = args[1].replace("<","").replace(">","").replace("@", "").replace("!", "");
@@ -75,5 +77,5 @@ client.on("guildMemberAdd", member =>
     	user.send(member.toString() + "** Kişisi NekoNyan Sunucusuna Kayıt Olmak İstiyor Lütfen Kaydını Tamamla!**");
     });
   }
-  member.guild.channels.cache.get("773670491285487656").send(welcomeMessage);
+  registerChannel.send(welcomeMessage);
 });
