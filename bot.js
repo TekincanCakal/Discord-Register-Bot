@@ -8,7 +8,7 @@ var registermanRole;
 client.on('ready', () =>
 {
   console.log("The bot is logged in xdd");
-  client.user.setUsername("Nyän | RegisterBot");
+  client.user.setUsername("Nyän");
   guild = client.guilds.cache.get("773638840002543618");//773638840002543618
   manRole = guild.roles.cache.get("773852113477435393");//773852113477435393
   womanRole = guild.roles.cache.get("773852330159243274");//773852330159243274
