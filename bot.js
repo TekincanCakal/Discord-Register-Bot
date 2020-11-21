@@ -38,7 +38,7 @@ client.on("message", message =>
       message.channel.send("Kullanıcı bulunamadı");
       return;
     }
-    if(!member.roles.cache.has(unregisterRole))
+    if(member.roles.cache.has(manRole) || member.roles.cache.has(womanRole))
     {
       message.channel.send("Kullanıcı zaten kayıtlı");
       return;
