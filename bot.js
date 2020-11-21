@@ -64,8 +64,7 @@ client.on("message", message =>
 		{
         		if(message.embeds[i].title === member.id) 
 			{
-            			message.channel.send("Detected");
-           		 	break;
+            			message.delete({ timeout: 100 });
     			}
 		}
 	}
