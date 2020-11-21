@@ -35,7 +35,12 @@ client.on("message", message =>
     var member = message.guild.members.cache.get(userId);
     if(member === null)
     {
-      message.content.send("Kullanıcı bulunamadı");
+      message.channel.send("Kullanıcı bulunamadı");
+      return;
+    }
+    if(!member.roles.cache.has(unregisterRole))
+    {
+      message.channel.send("Kullanıcı zaten kayıtlı");
       return;
     }
     var username = args[2] + " | " + args[3];
@@ -51,7 +56,7 @@ client.on("message", message =>
     member.roles.remove(unregisterRole).catch(console.error);
     message.delete({ timeout: 1000 });
     console.log(userId + " idli kişi kayıt oldu!");
-    message.channel.fetchMessages().then(async messages => 
+    message.channel.messages.fetch({ limit: 20 }).then(async messages => 
     {
     	for (const message of messages.array().reverse())
 	{
