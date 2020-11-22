@@ -45,7 +45,7 @@ client.on("message", message =>
     }
     var username = args[2] + " | " + args[3];
     member.setNickname(username);
-    if(args[0] === ".e")
+    if(args[0] === "!e")
     {
       member.roles.add(manRole).catch(console.error);
     }
