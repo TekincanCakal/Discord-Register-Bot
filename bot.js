@@ -23,13 +23,13 @@ client.on("message", message =>
     return;
   if(!(message.member.roles.cache.has("773854774947872769") || message.member.roles.cache.has("773925340576874496") || message.member.roles.cache.has("773991096530632726")))
     return;
-  if(message.channel.id === registerChannel.id && (message.content.startsWith(".e") || message.content.startsWith(".k")))
+  if(message.channel.id === registerChannel.id && (message.content.startsWith("!e") || message.content.startsWith("!k")))
   {
     var args = message.content.split(" ");
-    var userId = args[1].replace("<","").replace(">","").replace("@", "").replace(".", "");
+    var userId = args[1].replace("<","").replace(">","").replace("@", "").replace("!", "");
     if(args.length !== 4)
     {
-      message.channel.send(".e @tagSomeone isim yaş | .k @tagSomeone isim yaş");
+      message.channel.send("!e @tagSomeone isim yaş | !k @tagSomeone isim yaş");
       return;
     }
     var member = message.guild.members.cache.get(userId);
