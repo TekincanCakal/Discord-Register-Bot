@@ -9,7 +9,7 @@ var registerChannel;
 client.on('ready', () =>
 {
   console.log("Bot enabled");
-  client.user.setUsername("Nyän");
+  client.user.setUsername("Nyän | Register");
   guild = client.guilds.cache.get("773638840002543618");
   manRole = guild.roles.cache.get("773852113477435393");
   womanRole = guild.roles.cache.get("773852330159243274");
