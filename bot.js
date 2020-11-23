@@ -62,13 +62,13 @@ function loadUsers()
   });
   console.log("Users succesfully loaded!");
 }
-function addUser(var user)
+function addUser(user)
 {
   var keys = Object.keys(unregisterUsersJson);
   unregisterUsersJson["User" + keys.length] = user;
   saveUsers();
 }
-function removeUser(var user)
+function removeUser(user)
 {
   Object.keys(unregisterUsersJson).forEach(function(key)
   {
@@ -79,7 +79,7 @@ function removeUser(var user)
   });
   saveUsers();
 }
-function userMessage(var user)
+function userMessage(user)
 {
   const temp = new Discord.MessageEmbed()
   .setColor('#0099ff')
