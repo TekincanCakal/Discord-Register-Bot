@@ -125,21 +125,21 @@ client.on("message", message =>
         const temp = new Discord.MessageEmbed()
         .setColor('#0099ff')
         .setTitle(botName + " Bot Ayarları");
-        temp.addField(counter + ".Prefix:", prefix, false);
-        counter = counter + 1;
-        temp.addField(counter + ".ManRole:", manRole.toString(), false);
-        counter = counter + 1;
-        temp.addField(counter + ".WomanRole:", womanRole.toString(), false);
-        counter = counter + 1;
-        temp.addField(counter + ".UnregisterRole:", unregisterRole.toString(), false);
-        counter = counter + 1;
-        temp.addField(counter + ".RegisterChannel:", registerChannel.toString(), false);
-        counter = counter + 1;
-        temp.addField(counter + ".CommandChannel:", commandChannel.toString(), false);
-        counter = counter + 1;
-        temp.addField(counter + ".ManRegisterCommand:", manRegisterCommand, false);
-        counter = counter + 1;
-        temp.addField(counter + ".WomanRegisterCommand:", womanRegisterCommand, false);
+        temp.addField(counter++ + ".Prefix:", prefix, true);
+        temp.addField("** **", "** **", true);
+        temp.addField("** **", "** **", true);
+      
+        temp.addField(counter++ + ".ManRole:", manRole.toString(), true);
+        temp.addField(counter++ + ".WomanRole:", womanRole.toString(), true);
+        temp.addField(counter++ + ".UnregisterRole:", unregisterRole.toString(), true);
+      
+        temp.addField(counter++ + ".RegisterChannel:", registerChannel.toString(), true);
+        temp.addField(counter++ + ".CommandChannel:", commandChannel.toString(), true);
+        temp.addField("** **", "** **", true);
+      
+        temp.addField(counter++ + ".ManRegisterCommand:", manRegisterCommand, true);
+        temp.addField(counter++ + ".WomanRegisterCommand:", womanRegisterCommand, true);
+        temp.addField("** **", "** **", true);
         commandChannel.send(temp);
     }
     else
