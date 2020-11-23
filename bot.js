@@ -119,11 +119,11 @@ client.on("guildMemberAdd", member =>
 {
   const temp = new Discord.MessageEmbed()
   .setColor('#0099ff')
-  .setTitle(member.id)
+  .setTitle(member.user.id)
   .setDescription("**Sunucuya Yeni Bir Üye Geldi!**")
-  .setThumbnail(member.avatarURL())
+  .setThumbnail(member.user.avatarURL())
   .addFields(
-    { name: '** **', value: member.toString() + "** Seni Bekliyorduk.**"},
+    { name: '** **', value: member.user.toString() + "** Seni Bekliyorduk.**"},
     { name: '** **', value: "Lütfen Yetkili Birini Etiketleyip  **İsim** ve **Yaşınızı** Yazınız."},
     { name: '** **', value: womanRole.toString() + " Rolünü Almak İçin **SES TEYİT** Veremeniz zorunludur."},
     { name: '** **', value: "**Kayıt Durumu; **<:x:779684693246607371>"}
