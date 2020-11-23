@@ -3,7 +3,7 @@ const fs = require('fs');
 const client = new Discord.Client();
 client.login("NzQ3ODc1ODE5NzgyOTMwNDYy.X0VPog.kFEWtSaN0UH6saxySI7qqCJvGU8");
 
-const configJson;
+
 var guild;
 var manRole;
 var womanRole;
@@ -26,7 +26,7 @@ function loadConfig()
 {
   fs.readFile('./config.json', 'utf8', function (err, data)
   {
-    configJson = JSON.parse(data);
+    const configJson = JSON.parse(data);
     
     
   });
