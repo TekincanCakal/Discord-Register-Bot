@@ -46,8 +46,7 @@ client.on('ready', () =>
   guild = client.guilds.cache.get("773638840002543618");
   updateConfig();
   console.log(botName + " Bot Enabled!");
-  
- client.user.setActivity("test"); 
+  client.user.setActivity(memberCount() + " Kişi Bu Sunucuda"); 
 });
 client.on("message", message =>
 {
