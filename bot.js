@@ -15,9 +15,9 @@ var registerChannel;
 var commandChannel;
 var prefix;
 
-function saveConfig()
+async function saveConfig()
 {
-  fs.writeFile('config.json', JSON.stringify(configJson), function(err, result)
+  fs.writeFileSync('./config.json', JSON.stringify(configJson), function(err, result)
   {
      if(err)
       console.log('error', err);
