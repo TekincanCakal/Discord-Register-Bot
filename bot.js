@@ -133,7 +133,7 @@ client.on("guildMemberAdd", member =>
 });
 client.on("guildMemberRemove", member => 
 {
-  message.channel.messages.fetch({ limit: 50 }).then(async messages => 
+  registerChannel.messages.fetch({ limit: 50 }).then(async messages => 
   {
     for (const message of messages.array().reverse())
     {
