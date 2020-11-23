@@ -37,11 +37,23 @@ function updateConfig()
   prefix = configJson.Prefix;
   saveConfig();
 }
+function memberCount()
+{
+   return guild.members.filter(member => !member.user.bot).size; 
+}
 client.on('ready', () =>
 {
   guild = client.guilds.cache.get("773638840002543618");
   updateConfig();
   console.log(botName + " Bot Enabled!");
+  
+  client.user.setPresence({
+        status: "online",  // You can show online, idle... Do not disturb is dnd
+        game: {
+            name: memberCount()+" Kişi Bu Sunucuda",  // The message shown
+            type: "PLAYING" // PLAYING, WATCHING, LISTENING, STREAMING,
+        }
+    });
 });
 client.on("message", message =>
 {
