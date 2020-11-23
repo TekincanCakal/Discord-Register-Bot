@@ -51,60 +51,65 @@ client.on("message", message =>
   {
     if(args[0] === prefix + manRegisterCommand  || args[0] === prefix + womanRegisterCommand)
     {
-     if(message.member.hasPermission("MANAGE_ROLES"))
-    {
-      var args = message.content.split(" ");
-      if(args.length === 4)
+      if(message.member.hasPermission("MANAGE_ROLES"))
       {
-        if(message.mentions.users.size === 1)
+        var args = message.content.split(" ");
+        if(args.length === 4)
         {
-          const taggedUser = guild.members.cache.get(message.mentions.users.first().id);
-          if(!taggedUser.roles.cache.has(manRole) && !taggedUser.roles.cache.has(womanRole))
-            {
-              var username = args[2] + " | " + args[3];
-              taggedUser.setNickname(username);
-              if(args[0] === prefix + manRegisterCommand)
+          if(message.mentions.users.size === 1)
+          {
+            const taggedUser = guild.members.cache.get(message.mentions.users.first().id);
+            if(!taggedUser.roles.cache.has(manRole) && !taggedUser.roles.cache.has(womanRole))
               {
-                taggedUser.roles.add(manRole).catch(console.error);
+                var username = args[2] + " | " + args[3];
+                taggedUser.setNickname(username);
+                if(args[0] === prefix + manRegisterCommand)
+                {
+                  taggedUser.roles.add(manRole).catch(console.error);
+                }
+                else
+                {
+                  taggedUser.roles.add(womanRole).catch(console.error);
+                }
+                taggedUser.roles.remove(unregisterRole).catch(console.error);
+                registerChannel.messages.fetch({ limit: 50 }).then(async messages => 
+                {
+                  for (const message of messages.array().reverse())
+                  {
+                    for(var i = 0; i < message.embeds.length; i++) 
+                    {
+                      if(message.embeds[i].title === taggedUser.id) 
+                      {
+                        message.delete({ timeout: 0 });
+                      }
+                    }
+                  }
+                });
+                message.delete({ timeout: 100});
               }
               else
               {
-                taggedUser.roles.add(womanRole).catch(console.error);
+                message.reply("Bu kullanıcı zaten kayıtlı!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
+                message.delete({ timeout: 1000});
               }
-              taggedUser.roles.remove(unregisterRole).catch(console.error);
-              registerChannel.messages.fetch({ limit: 50 }).then(async messages => 
-              {
-                for (const message of messages.array().reverse())
-                {
-                  for(var i = 0; i < message.embeds.length; i++) 
-                  {
-                    if(message.embeds[i].title === taggedUser.id) 
-                    {
-                      message.delete({ timeout: 0 });
-                    }
-                  }
-                }
-              });
-              message.delete({ timeout: 100});
-            }
-            else
-            {
-              message.reply("Bu kullanıcı zaten kayıtlı!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
-              message.delete({ timeout: 1000});
-            }
+          }
+          else
+          {
+            message.reply("Kayıt etmek istediğin kişiyi taglemeyi unuttun veya 1 den fazla kişiyi tagledin!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
+            message.delete({ timeout: 1000});
+          }
         }
-        else
-        {
-          message.reply("Kayıt etmek istediğin kişiyi taglemeyi unuttun veya 1 den fazla kişiyi tagledin!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
-          message.delete({ timeout: 1000});
-        }
+         else
+          {
+            message.reply(prefix + manRegisterCommand + "/" + womanRegisterCommand + "@kişi isim yaş").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
+            message.delete({ timeout: 1000});
+          }
       }
-    }
-    else
-    {
-      message.reply("Bu komutu kullanmak için yetkin yok!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
-      message.delete({ timeout: 1000});
-    } 
+      else
+      {
+        message.reply("Bu komutu kullanmak için yetkin yok!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
+        message.delete({ timeout: 1000});
+      } 
     }
   }
   else if(message.channel.id === commandChannel.id)
