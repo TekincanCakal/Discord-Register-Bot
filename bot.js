@@ -121,7 +121,7 @@ client.on("message", message =>
   {
     if(message.member.hasPermission("ADMINISTRATOR"))
     {
-        const counter = 1;
+        var counter = 1;
         const temp = new Discord.MessageEmbed()
         .setColor('#0099ff')
         .setTitle(botName + " Bot Ayarları");
