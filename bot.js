@@ -238,6 +238,7 @@ client.on("guildMemberAdd", member =>
   )
   .setTimestamp();
   registerChannel.send(temp);
+  client.user.setActivity(memberCount() + " Kişi Bu Sunucuda"); 
 });
 client.on("guildMemberRemove", member => 
 {
@@ -254,4 +255,5 @@ client.on("guildMemberRemove", member =>
       }
     }
   });
+  client.user.setActivity(memberCount() + " Kişi Bu Sunucuda"); 
 });
