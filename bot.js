@@ -89,40 +89,51 @@ client.on("message", message =>
             {
               message.reply("Bu kullanıcı zaten kayıtlı!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
               message.delete({ timeout: 1000});
-              return;
             }
           }
           else
           {
             message.reply(prefix + manRegisterCommand + "/" + womanRegisterCommand + " @kişi isim yaş").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
             message.delete({ timeout: 1000});
-            return;
           }
         }
         else
         {
           message.reply("Kayıt etmek istediğin kişiyi taglemeyi unuttun veya 1 den fazla kişiyi tagledin!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
           message.delete({ timeout: 1000});
-          return;
         }
       }
       else
       {
         message.reply(prefix +manRegisterCommand + "/" + womanRegisterCommand + " @kişi isim yaş").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
         message.delete({ timeout: 1000});
-        return;
       }
     }
     else
     {
       message.reply("Bu komutu kullanmak için yetkin yok!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
       message.delete({ timeout: 1000});
-      return;
     }
   }
   else if(message.channel.id === commandChannel.id)
   {
-  
+    if(message.member.hasPermission("ADMINISTRATOR"))
+    {
+      if(message.content === prefix + "settings")
+      {
+        var str = "";
+        for (const [key, value] of Object.entries(configJson)) 
+        {
+          str += "[" + key + "] = " + value + "\n";
+        }
+        commandChannel.send(str.trim());
+      }
+    }
+    else
+    {
+      message.reply("Bu komutu kullanmak için yetkin yok!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
+      message.delete({ timeout: 1000});
+    }
   }
 });
 client.on("guildMemberAdd", member =>
