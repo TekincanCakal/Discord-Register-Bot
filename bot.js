@@ -124,11 +124,14 @@ client.on("message", message =>
         var str = "";
         const temp = new Discord.MessageEmbed()
         .setColor('#0099ff')
-        .setTitle(configJson.BotName + " Bot Ayarları")
-        .setTimestamp();
+        .setTitle(configJson.BotName + " Bot Ayarları");
+        const temp2 = new Discord.MessageEmbed()
+        .setColor('#0099ff')
+        .setTitle(configJson.BotName + " Bot Ayarları");
         for (const [key, value] of Object.entries(configJson)) 
         {
-          temp.addField(key, value, false);
+          temp.addField("** **", "**key + ":** " + value , false);
+          temp2.addField("**key + ":** " + value, "** **" , false);
         }
         commandChannel.send(temp);
       }
