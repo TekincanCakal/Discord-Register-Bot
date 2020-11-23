@@ -48,7 +48,6 @@ client.on('ready', () =>
 {
   console.log("Bot enabled");
   loadConfig();
-  loadUsers();
 });
 client.on("message", message =>
 {
