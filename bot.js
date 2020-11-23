@@ -26,7 +26,7 @@ function loadConfig()
 {
   fs.readFile('./config.json', 'utf8', function (err, data)
   {
-    configJson = JSON.parse("'" + data + "'");    
+    configJson = JSON.parse(data);    
   });
   console.log("Config succesfully loaded!" + configJson.BotName);
   updateConfig();
