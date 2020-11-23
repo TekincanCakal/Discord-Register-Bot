@@ -121,18 +121,25 @@ client.on("message", message =>
   {
     if(message.member.hasPermission("ADMINISTRATOR"))
     {
-        const counter = 0;
+        const counter = 1;
         const temp = new Discord.MessageEmbed()
         .setColor('#0099ff')
-        .setTitle(botName + " Bot Ayarları")
-        .addField(counter++ + "Prefix:", prefix, false)
-        .addField(counter++ + "ManRole:", manRole.toString(), false)
-        .addField(counter++ + "WomanRole:", womanRole.toString(), false)
-        .addField(counter++ + "UnregisterRole:", unregisterRole.toString(), false)
-        .addField(counter++ + "RegisterChannel:", registerChannel.toString(), false)
-        .addField(counter++ + "CommandChannel:", commandChannel.toString(), false)
-        .addField(counter++ + "ManRegisterCommand:", manRegisterCommand, false)
-        .addField(counter++ + "WomanRegisterCommand:", womanRegisterCommand, false);
+        .setTitle(botName + " Bot Ayarları");
+        temp.addField(counter + ".Prefix:", prefix, false);
+        counter = counter + 1;
+        temp.addField(counter + ".ManRole:", manRole.toString(), false);
+        counter = counter + 1;
+        temp.addField(counter + ".WomanRole:", womanRole.toString(), false);
+        counter = counter + 1;
+        temp.addField(counter + ".UnregisterRole:", unregisterRole.toString(), false);
+        counter = counter + 1;
+        temp.addField(counter + ".RegisterChannel:", registerChannel.toString(), false);
+        counter = counter + 1;
+        temp.addField(counter + ".CommandChannel:", commandChannel.toString(), false);
+        counter = counter + 1;
+        temp.addField(counter + ".ManRegisterCommand:", manRegisterCommand, false);
+        counter = counter + 1;
+        temp.addField(counter + ".WomanRegisterCommand:", womanRegisterCommand, false);
         commandChannel.send(temp);
     }
     else
