@@ -47,13 +47,7 @@ client.on('ready', () =>
   updateConfig();
   console.log(botName + " Bot Enabled!");
   
-  client.user.setPresence({
-        status: "online", 
-        game: {
-            name: "test",
-            type: "PLAYING"
-        }
-    });
+ client.user.setActivity("test"); 
 });
 client.on("message", message =>
 {
