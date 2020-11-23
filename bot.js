@@ -4,7 +4,6 @@ const client = new Discord.Client();
 client.login("NzQ3ODc1ODE5NzgyOTMwNDYy.X0VPog.kFEWtSaN0UH6saxySI7qqCJvGU8");
 
 var configJson;
-var unregisterUsersJson;
 var guild;
 var manRole;
 var womanRole;
@@ -44,72 +43,6 @@ function updateConfig()
   womanRegisterCommand = configJson.WomanRegisterCommand;
   prefix = configJson.Prefix;
   saveConfig();
-}
-
-function saveUsers()
-{
-  fs.writeFile('unregisterUsers.json', JSON.stringify(unregisterUsersJson), function(err, result)
-  {
-     if(err)
-      console.log('error', err);
-  });
-}
-function loadUsers()
-{
-  fs.readFile('unregisterUsers.json', 'utf8', function (err, data)
-  {
-    unregisterUsersJson = JSON.parse(data);    
-  });
-  console.log("Users succesfully loaded!");
-}
-function addUser(user)
-{
-  var keys = Object.keys(unregisterUsersJson);
-  unregisterUsersJson["User" + keys.length] = user;
-  saveUsers();
-}
-function removeUser(user)
-{
-  Object.keys(unregisterUsersJson).forEach(function(key)
-  {
-    if (unregisterUsersJson[key] === user.id) 
-    {
-      delete unregisterUsersJson[key];
-    }
-  });
-  saveUsers();
-}
-function userMessage(user)
-{
-  const temp = new Discord.MessageEmbed()
-  .setColor('#0099ff')
-  .setTitle(user.id)
-  .setDescription("**Sunucuya Yeni Bir Üye Geldi!**")
-  .setThumbnail(user.avatarURL())
-  .addFields(
-    { name: '** **', value: user.toString() + "** Seni Bekliyorduk.**"},
-    { name: '** **', value: "Lütfen Yetkili Birini Etiketleyip  **İsim** ve **Yaşınızı** Yazınız."},
-    { name: '** **', value: womanRole.toString() + " Rolünü Almak İçin **SES TEYİT** Veremeniz zorunludur."},
-    { name: '** **', value: "**Kayıt Durumu; **<:x:779684693246607371>"}
-  )
-  .setTimestamp();
-  return temp;
-}
-async function printUnregisterUsers()
-{
-  registerChannel.messages.fetch({ limit: 100 }).then(async messages => 
-  {
-    for (const message of messages.array().reverse())
-    {
-      message.delete({ timeout: 0});
-    }
-  });
-  var memberCount = guild.members.cache.filter(member => !member.user.bot).size;
-  registerChannel.send("**Sunucudaki Toplam Kişi Sayısı: " + memberCount + "**");
-  Object.keys(unregisterUsersJson).forEach(function(key)
-  {
-    registerChannel.send(userMessage(guild.members.cache.find(user => user.id === unregisterUsersJson[key])));
-  });
 }
 client.on('ready', () =>
 {
@@ -185,11 +118,33 @@ client.on("message", message =>
 });
 client.on("guildMemberAdd", member =>
 {
-  addUser(member.id);
-  registerChannel.send(userMessage(member));
+  const temp = new Discord.MessageEmbed()
+  .setColor('#0099ff')
+  .setTitle(member.id)
+  .setDescription("**Sunucuya Yeni Bir Üye Geldi!**")
+  .setThumbnail(member.avatarURL())
+  .addFields(
+    { name: '** **', value: member.toString() + "** Seni Bekliyorduk.**"},
+    { name: '** **', value: "Lütfen Yetkili Birini Etiketleyip  **İsim** ve **Yaşınızı** Yazınız."},
+    { name: '** **', value: womanRole.toString() + " Rolünü Almak İçin **SES TEYİT** Veremeniz zorunludur."},
+    { name: '** **', value: "**Kayıt Durumu; **<:x:779684693246607371>"}
+  )
+  .setTimestamp();
+  registerChannel.send(temp);
 });
 client.on("guildMemberRemove", member => 
 {
-  removeUser(member.id);
-  printUnregisterUsers();
+  message.channel.messages.fetch({ limit: 50 }).then(async messages => 
+  {
+    for (const message of messages.array().reverse())
+    {
+      for(var i = 0; i < message.embeds.length; i++) 
+      {
+        if(message.embeds[i].title === member.id) 
+        {
+          message.delete({ timeout: 100 });
+        }
+      }
+    }
+  });
 });
