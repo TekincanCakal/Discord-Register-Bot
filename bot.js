@@ -28,7 +28,7 @@ function loadConfig()
   {
     configJson = JSON.parse(data);    
   });
-  console.log("Config succesfully loaded!" + configJson.BotName);
+  console.log("Config succesfully loaded!" + configJson["BotName"]);
   updateConfig();
 }
 function updateConfig()
