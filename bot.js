@@ -151,31 +151,31 @@ client.on("message", message =>
             else
             {
               message.reply(message.author.toString() + " Bu kullanıcı zaten kayıtlı!");
-              message.delete({ timeout: 2000 );
+              message.delete({ timeout: 2000});
             }
           }
           else
           {
             message.reply(message.author.toString() + prefix +manRegisterCommand + "/" + womanRegisterCommand + " @kişi ism yaş");
-            message.delete({ timeout: 2000 );
+           message.delete({ timeout: 2000});
           }
         }
         else
         {
           message.reply(message.author.toString() + " Kayıt etmek istediğin kişiyi taglemeyi unuttun veya 1 den fazla kişiyi tagledin!");
-          message.delete({ timeout: 2000 );
+          message.delete({ timeout: 2000});
         }
       }
       else
       {
         message.reply(message.author.toString() + prefix +manRegisterCommand + "/" + womanRegisterCommand + " @kişi ism yaş");
-        message.delete({ timeout: 2000 );
+        message.delete({ timeout: 2000});
       }
     }
     else
     {
       message.reply(message.author.toString() + " Bu komutu kullanmak için yetkin yok!");
-      message.delete({ timeout: 2000 );
+     message.delete({ timeout: 2000});
     }
   }
   else if(message.channel.id === commandChannel.id)
