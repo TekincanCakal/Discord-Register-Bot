@@ -28,6 +28,7 @@ function loadConfig()
   {
     configJson = JSON.parse(data);    
   });
+  updateConfig();
   console.log("Config succesfully loaded!");
 }
 function updateConfig()
@@ -46,9 +47,8 @@ function updateConfig()
 }
 client.on('ready', () =>
 {
-  console.log("Bot enabled");
   loadConfig();
-  console.log(configJson.BotName);
+  console.log(configJson.BotName + " Bot Enabled!");
 });
 client.on("message", message =>
 {
