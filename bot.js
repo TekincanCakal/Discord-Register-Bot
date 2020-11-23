@@ -57,11 +57,11 @@ client.on("message", message =>
           if(args[0] === prefix + manRegisterCommand || args[0] == prefix + womanRegisterCommand)
           {
             const taggedUser = message.mentions.users.first();
-            if(!taggedUser.roles.cache.has(manRole) && !taggedUser.roles.cache.has(womanRole))
+            if(!taggedUser.roles.has(manRole) && !taggedUser.roles.has(womanRole))
             {
               var username = args[2] + " | " + args[3];
               taggedUser.setNickname(username);
-              if(args[0] === prefix + ManRegisterCommand)
+              if(args[0] === prefix + manRegisterCommand)
               {
                 member.roles.add(manRole).catch(console.error);
               }
@@ -70,7 +70,6 @@ client.on("message", message =>
                 member.roles.add(womanRole).catch(console.error);
               }
               member.roles.remove(unregisterRole).catch(console.error);
-              printUnregisterUsers();
             }
             else
             {
