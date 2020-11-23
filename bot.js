@@ -1,9 +1,9 @@
 const Discord = require("discord.js");
-const fs = require('fs');
+const configJson = require('.config.json');
 const client = new Discord.Client();
 client.login("NzQ3ODc1ODE5NzgyOTMwNDYy.X0VPog.kFEWtSaN0UH6saxySI7qqCJvGU8");
 
-var configJson;
+
 var guild;
 var manRole;
 var womanRole;
