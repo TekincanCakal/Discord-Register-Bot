@@ -39,7 +39,7 @@ function updateConfig()
 }
 function memberCount()
 {
-   return guild.members.filter(member => !member.user.bot).size; 
+   return guild.members.cache.filter(member => !member.user.bot).size; 
 }
 client.on('ready', () =>
 {
