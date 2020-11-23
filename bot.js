@@ -47,7 +47,7 @@ client.on("message", message =>
     return;
   if(message.channel.id === registerChannel.id)
   {
-    if(message.author.hasPermission("MANAGE_ROLES"))
+    if(message.member.hasPermission("MANAGE_ROLES"))
     {
       var args = message.content.split(" ");
       if(args.length === 4)
