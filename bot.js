@@ -24,7 +24,6 @@ function saveConfig()
 }
 function updateConfig()
 {
-  guild = client.guilds.cache.get(configJson.Guild);
   client.user.setUsername(configJson.BotName);
   manRole = guild.roles.cache.get(configJson.ManRole);
   womanRole = guild.roles.cache.get(configJson.WomanRole);
@@ -38,6 +37,7 @@ function updateConfig()
 }
 client.on('ready', () =>
 {
+  guild = client.guilds.cache.get("773638840002543618");
   updateConfig();
   console.log(configJson.BotName + " Bot Enabled!");
 });
