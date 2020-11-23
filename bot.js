@@ -103,7 +103,7 @@ async function printUnregisterUsers()
     {
       message.delete({ timeout: 0});
     }
-  }
+  });
   var memberCount = guild.members.cache.filter(member => !member.user.bot).size;
   registerChannel.send("**Sunucudaki Toplam Kişi Sayısı: " memberCount + "**");
   Object.keys(unregisterUsersJson).forEach(function(key)
