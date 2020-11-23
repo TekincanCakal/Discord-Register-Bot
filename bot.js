@@ -105,7 +105,7 @@ async function printUnregisterUsers()
     }
   });
   var memberCount = guild.members.cache.filter(member => !member.user.bot).size;
-  registerChannel.send("**Sunucudaki Toplam Kişi Sayısı: " memberCount + "**");
+  registerChannel.send("**Sunucudaki Toplam Kişi Sayısı: " + memberCount + "**");
   Object.keys(unregisterUsersJson).forEach(function(key)
   {
     registerChannel.send(userMessage(guild.members.cache.find(user => user.id === unregisterUsersJson[key])));
