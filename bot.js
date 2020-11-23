@@ -121,6 +121,8 @@ client.on("message", message =>
   {
     if(message.member.hasPermission("ADMINISTRATOR"))
     {
+      if(message.mentions.users.size === 1 && message.mentions.users.first().id === "747875819782930462")
+      {
         const temp = new Discord.MessageEmbed()
         .setColor('#0099ff')
         .setTitle(botName + " Bot Ayarları");
@@ -131,12 +133,14 @@ client.on("message", message =>
       
         temp.addField("4.RegisterChannel:", registerChannel.toString(), true);
         temp.addField("5.CommandChannel:", commandChannel.toString(), true);
-        temp.addField("6.Prefix:", prefix, true);
+        temp.addField("6.BotName:", botName, true);
       
         temp.addField("7.ManRegisterCommand:", manRegisterCommand, true);
         temp.addField("8.WomanRegisterCommand:", womanRegisterCommand, true);
-        temp.addField("9.BotName::", botName, true);
+        temp.addField("9.Prefix:", prefix, true);
+        
         commandChannel.send(temp);
+      }
     }
     else
     {
