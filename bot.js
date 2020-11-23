@@ -133,8 +133,8 @@ client.on("message", message =>
           temp.addField("7.ManRegisterCommand:", manRegisterCommand, true);
           temp.addField("8.WomanRegisterCommand:", womanRegisterCommand, true);
           temp.addField("9.Prefix:", prefix, true);
-          temp.content = "<@747875819782930462> <AyarSıraNo> <Tag/String>";
           commandChannel.send(temp);
+          commandChannel.send("<@747875819782930462> <AyarSıraNo> <Tag/String>");
         }
         else if(args.length === 3)
         {
