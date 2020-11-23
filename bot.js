@@ -1,4 +1,3 @@
-require('dotenv').config(); 
 const Discord = require("discord.js");
 const configJson = require('./config.json');
 const fs = require("fs");
@@ -43,7 +42,6 @@ client.on('ready', () =>
   guild = client.guilds.cache.get("773638840002543618");
   updateConfig();
   console.log(botName + " Bot Enabled!");
-  console.log(process.env.BotName);
 });
 client.on("message", message =>
 {
