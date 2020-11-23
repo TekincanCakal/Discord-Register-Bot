@@ -121,25 +121,100 @@ client.on("message", message =>
   {
     if(message.member.hasPermission("ADMINISTRATOR"))
     {
-      if(message.mentions.users.size === 1 && message.mentions.users.first().id === "747875819782930462")
+      if(message.mentions.users.size && message.mentions.users.first().id === "747875819782930462")
       {
-        const temp = new Discord.MessageEmbed()
-        .setColor('#0099ff')
-        .setTitle(botName + " Bot Ayarları");
-      
-        temp.addField("1.ManRole:", manRole.toString(), true);
-        temp.addField("2.WomanRole:", womanRole.toString(), true);
-        temp.addField("3.UnregisterRole:", unregisterRole.toString(), true);
-      
-        temp.addField("4.RegisterChannel:", registerChannel.toString(), true);
-        temp.addField("5.CommandChannel:", commandChannel.toString(), true);
-        temp.addField("6.BotName:", botName, true);
-      
-        temp.addField("7.ManRegisterCommand:", manRegisterCommand, true);
-        temp.addField("8.WomanRegisterCommand:", womanRegisterCommand, true);
-        temp.addField("9.Prefix:", prefix, true);
-        
-        commandChannel.send(temp);
+        var args = message.content.split(" ");
+        if(args.length === 0)
+        {
+          const temp = new Discord.MessageEmbed()
+          .setColor('#0099ff')
+          .setTitle(botName + " Bot Ayarları");
+          temp.addField("1.ManRole:", manRole.toString(), true);
+          temp.addField("2.WomanRole:", womanRole.toString(), true);
+          temp.addField("3.UnregisterRole:", unregisterRole.toString(), true);
+          temp.addField("4.RegisterChannel:", registerChannel.toString(), true);
+          temp.addField("5.CommandChannel:", commandChannel.toString(), true);
+          temp.addField("6.BotName:", botName, true);
+          temp.addField("7.ManRegisterCommand:", manRegisterCommand, true);
+          temp.addField("8.WomanRegisterCommand:", womanRegisterCommand, true);
+          temp.addField("9.Prefix:", prefix, true);
+          commandChannel.send(temp);
+        }
+        else if(args.length === 3)
+        {
+          var index = parseInt(args[1]);
+          if(index >= 1 && index <= 9)
+          {
+            if(index >= 1 && index <= 5)
+            {
+              if(args[2].length === 18)
+              {
+                if(index === 1)
+                {
+                  configJson.ManRole = args[2];
+                }
+                else if(index === 2)
+                {
+                  configJson.WomanRole = args[2];
+                }
+                else if(index === 3)
+                {
+                  configJson.UnregisterRole = args[2];
+                }
+                else if(index === 4)
+                {
+                  configJson.RegisterChannel = args[2];
+                }
+                else if(index === 5)
+                {
+                  configJson.CommandChannel = args[2];
+                }
+              }
+              else
+              {
+                message.reply("Yanlış kanal/rol idsi girdiniz!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
+                message.delete({ timeout: 1000});
+              } 
+            }
+            else if(index === 6)
+            {
+              configJson.BotName = args[2];
+            }
+            else
+            {
+              if(index == 7)
+              {
+                configJson.ManRegisterCommand = args[2];
+              }
+              else if(index == 8)
+              {
+                configJson.WomanRegisterCommand = args[2];
+              }
+              else if(index == 9)
+              {
+                if(args[2].length === 1)
+                {
+                  configJson.Prefix = args[2];
+                }
+                else
+                {
+                  message.reply("Prefix sadece tek karakterden oluşmalıdır!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
+                  message.delete({ timeout: 1000});
+                } 
+              }
+            }
+          }
+          else
+          {
+            message.reply("Yanlış index girdiniz!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
+            message.delete({ timeout: 1000});
+          }
+        }
+        else
+        {
+          message.reply(args[0] + " <AyarSıraNo> <Tag/String>").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
+          message.delete({ timeout: 1000});
+        }
       }
     }
     else
