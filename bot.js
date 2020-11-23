@@ -123,8 +123,8 @@ client.on("message", message =>
     {
       if(message.mentions.users.size && message.mentions.users.first().id === "747875819782930462")
       {
-        var args = message.content.split(" ");
-        if(args.length === 0)
+        var args = message.content.trim().split(" ");
+        if(args.length === 1)
         {
           const temp = new Discord.MessageEmbed()
           .setColor('#0099ff')
