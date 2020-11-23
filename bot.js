@@ -122,11 +122,15 @@ client.on("message", message =>
       if(message.content === prefix + "settings")
       {
         var str = "";
+        const temp = new Discord.MessageEmbed()
+        .setColor('#0099ff')
+        .setTitle(configJson.BotName + " Bot Ayarları")
+        .setTimestamp();
         for (const [key, value] of Object.entries(configJson)) 
         {
-          str += "[" + key + "] = " + value + "\n";
+          temp.addField(key, value, false);
         }
-        commandChannel.send(str.trim());
+        commandChannel.send(temp);
       }
     }
     else
