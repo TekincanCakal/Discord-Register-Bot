@@ -4,7 +4,6 @@ const fs = require("fs");
 const client = new Discord.Client();
 client.login("NzQ3ODc1ODE5NzgyOTMwNDYy.X0VPog.kFEWtSaN0UH6saxySI7qqCJvGU8");
 
-
 var guild;
 var manRole;
 var womanRole;
@@ -23,19 +22,6 @@ function saveConfig()
       console.log('error', err);
   });
 }
-function loadConfig()
-{
-  fs.readFile('./config.json', 'utf8', function (err, data)
-  {
-    configJson = JSON.parse(data);
-    
-    
-  });
-  console.log(Object.keys(configJson).length + "");
-  console.log(Object.keys(configJson)[0]);
-  console.log("Config succesfully loaded!" + configJson["BotName"]);
-  updateConfig();
-}
 function updateConfig()
 {
   guild = client.guilds.cache.get(configJson.Guild);
@@ -52,7 +38,7 @@ function updateConfig()
 }
 client.on('ready', () =>
 {
-  loadConfig();
+  updateConfig();
   console.log(configJson.BotName + " Bot Enabled!");
 });
 client.on("message", message =>
