@@ -24,7 +24,7 @@ function saveConfig()
 }
 function loadConfig()
 {
-  fs.readFile('config.json', 'utf8', function (err, data)
+  fs.readFile('./config.json', 'utf8', function (err, data)
   {
     configJson = JSON.parse(data);    
   });
