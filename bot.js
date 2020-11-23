@@ -31,7 +31,7 @@ function loadConfig()
     console.log(Object.keys(configJson)[0]);
     
   });
-  console.log("Config succesfully loaded!" + configJson.BotName);
+  console.log("Config succesfully loaded!" + configJson["BotName"]);
   updateConfig();
 }
 function updateConfig()
