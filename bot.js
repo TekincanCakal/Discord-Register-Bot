@@ -87,35 +87,35 @@ client.on("message", message =>
             }
             else
             {
-              message.reply(message.author.toString() + " Bu kullanıcı zaten kayıtlı!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
+              message.reply("Bu kullanıcı zaten kayıtlı!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
               message.delete({ timeout: 1000});
               return;
             }
           }
           else
           {
-            message.reply(message.author.toString() + prefix + manRegisterCommand + "/" + womanRegisterCommand + " @kişi isim yaş").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
+            message.reply(prefix + manRegisterCommand + "/" + womanRegisterCommand + " @kişi isim yaş").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
             message.delete({ timeout: 1000});
             return;
           }
         }
         else
         {
-          message.reply(message.author.toString() + " Kayıt etmek istediğin kişiyi taglemeyi unuttun veya 1 den fazla kişiyi tagledin!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
+          message.reply("Kayıt etmek istediğin kişiyi taglemeyi unuttun veya 1 den fazla kişiyi tagledin!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
           message.delete({ timeout: 1000});
           return;
         }
       }
       else
       {
-        message.reply(message.author.toString() + prefix +manRegisterCommand + "/" + womanRegisterCommand + " @kişi isim yaş").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
+        message.reply(prefix +manRegisterCommand + "/" + womanRegisterCommand + " @kişi isim yaş").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
         message.delete({ timeout: 1000});
         return;
       }
     }
     else
     {
-      message.reply(message.author.toString() + " Bu komutu kullanmak için yetkin yok!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
+      message.reply("Bu komutu kullanmak için yetkin yok!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
       message.delete({ timeout: 1000});
       return;
     }
