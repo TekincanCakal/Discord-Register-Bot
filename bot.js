@@ -130,8 +130,8 @@ client.on("message", message =>
         .setTitle(configJson.BotName + " Bot Ayarları");
         for (const [key, value] of Object.entries(configJson)) 
         {
-          temp.addField("** **", "**key + ":** " + value , false);
-          temp2.addField("**key + ":** " + value, "** **" , false);
+          temp.addField("** **", "**"+ key + ":** " + value , false);
+          temp2.addField("**key" + ":** " + value, "** **" , false);
         }
         commandChannel.send(temp);
       }
