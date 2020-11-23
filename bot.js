@@ -56,10 +56,8 @@ client.on("message", message =>
       {
         if(message.mentions.users.size === 1)
         {
-          if(args[0] === prefix + manRegisterCommand || args[0] == prefix + womanRegisterCommand)
-          {
-            const taggedUser = guild.members.cache.get(message.mentions.users.first().id);
-            if(!taggedUser.roles.cache.has(manRole) && !taggedUser.roles.cache.has(womanRole))
+          const taggedUser = guild.members.cache.get(message.mentions.users.first().id);
+          if(!taggedUser.roles.cache.has(manRole) && !taggedUser.roles.cache.has(womanRole))
             {
               var username = args[2] + " | " + args[3];
               taggedUser.setNickname(username);
@@ -92,12 +90,6 @@ client.on("message", message =>
               message.reply("Bu kullanıcı zaten kayıtlı!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
               message.delete({ timeout: 1000});
             }
-          }
-          else
-          {
-            message.reply(prefix + manRegisterCommand + "/" + womanRegisterCommand + " @kişi isim yaş").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
-            message.delete({ timeout: 1000});
-          }
         }
         else
         {
@@ -138,6 +130,7 @@ client.on("message", message =>
           temp.addField("7.ManRegisterCommand:", manRegisterCommand, true);
           temp.addField("8.WomanRegisterCommand:", womanRegisterCommand, true);
           temp.addField("9.Prefix:", prefix, true);
+          temp.content = "<@747875819782930462> <AyarSıraNo> <Tag/String>";
           commandChannel.send(temp);
         }
         else if(args.length === 3)
@@ -212,11 +205,6 @@ client.on("message", message =>
           message.reply("Başarıyla Değiştirildi!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
           message.delete({ timeout: 1000});
           updateConfig();
-        }
-        else
-        {
-          message.reply(args[0] + " <AyarSıraNo> <Tag/String>").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
-          message.delete({ timeout: 1000});
         }
       }
     }
