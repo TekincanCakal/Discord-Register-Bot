@@ -49,11 +49,11 @@ client.on("message", message =>
     return;
   if(message.channel.id === registerChannel.id)
   {
+    var args = message.content.split(" ");
     if(args[0] === prefix + manRegisterCommand  || args[0] === prefix + womanRegisterCommand)
     {
       if(message.member.hasPermission("MANAGE_ROLES"))
       {
-        var args = message.content.split(" ");
         if(args.length === 4)
         {
           if(message.mentions.users.size === 1)
