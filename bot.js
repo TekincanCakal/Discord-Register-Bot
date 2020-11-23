@@ -5,6 +5,7 @@ const client = new Discord.Client();
 client.login("NzQ3ODc1ODE5NzgyOTMwNDYy.X0VPog.kFEWtSaN0UH6saxySI7qqCJvGU8");
 
 var guild;
+var botName;
 var manRole;
 var womanRole;
 var unregisterRole;
@@ -24,7 +25,7 @@ function saveConfig()
 }
 function updateConfig()
 {
-  client.user.setUsername(configJson.BotName);
+  client.user.setUsername(botName);
   manRole = guild.roles.cache.get(configJson.ManRole);
   womanRole = guild.roles.cache.get(configJson.WomanRole);
   unregisterRole = guild.roles.cache.get(configJson.UnregisterRole);
@@ -38,8 +39,9 @@ function updateConfig()
 client.on('ready', () =>
 {
   guild = client.guilds.cache.get("773638840002543618");
+  botName = "Nyän | Register";
   updateConfig();
-  console.log(configJson.BotName + " Bot Enabled!");
+  console.log(botName + " Bot Enabled!");
 });
 client.on("message", message =>
 {
@@ -119,23 +121,18 @@ client.on("message", message =>
   {
     if(message.member.hasPermission("ADMINISTRATOR"))
     {
+        const counter = 0;
         const temp = new Discord.MessageEmbed()
         .setColor('#0099ff')
-        .setTitle(configJson.BotName + " Bot Ayarları");
-        var counter = 0;
-        for (const [key, value] of Object.entries(configJson)) 
-        {
-          if(counter == 1)
-          {
-            temp.addField(key, value , true);
-            counter = 0;
-          }
-          else
-          {
-            temp.addField(key, value , true);
-            counter = counter + 1;
-          }          
-        }
+        .setTitle(BotName + " Bot Ayarları")
+        .addField(counter++ + "Prefix:", prefix, false)
+        .addField(counter++ + "ManRole:", manRole.toString(), false)
+        .addField(counter++ + "WomanRole:", womanRole.toString(), false)
+        .addField(counter++ + "UnregisterRole:", unregisterRole.toString(), false)
+        .addField(counter++ + "RegisterChannel:", registerChannel.toString(), false)
+        .addField(counter++ + "CommandChannel:", commandChannel.toString(), false)
+        .addField(counter++ + "ManRegisterCommand:", manRegisterCommand, false)
+        .addField(counter++ + "WomanRegisterCommand:", womanRegisterCommand, false);
         commandChannel.send(temp);
     }
     else
