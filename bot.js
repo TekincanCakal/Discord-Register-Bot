@@ -83,35 +83,36 @@ client.on("message", message =>
                   }
                 }
               });
+              message.delete({ timeout: 100});
             }
             else
             {
-              message.reply(message.author.toString() + " Bu kullanıcı zaten kayıtlı!").then(msg => {msg.delete({ timeout: 2000 })}).catch(console.error);
-              message.delete({ timeout: 2000});
+              message.reply(message.author.toString() + " Bu kullanıcı zaten kayıtlı!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
+              message.delete({ timeout: 1000});
             }
           }
           else
           {
-            message.reply(message.author.toString() + prefix + manRegisterCommand + "/" + womanRegisterCommand + " @kişi ism yaş").then(msg => {msg.delete({ timeout: 2000 })}).catch(console.error);
-            message.delete({ timeout: 2000});
+            message.reply(message.author.toString() + prefix + manRegisterCommand + "/" + womanRegisterCommand + " @kişi ism yaş").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
+            message.delete({ timeout: 1000});
           }
         }
         else
         {
-          message.reply(message.author.toString() + " Kayıt etmek istediğin kişiyi taglemeyi unuttun veya 1 den fazla kişiyi tagledin!").then(msg => {msg.delete({ timeout: 2000 })}).catch(console.error);
-          message.delete({ timeout: 2000});
+          message.reply(message.author.toString() + " Kayıt etmek istediğin kişiyi taglemeyi unuttun veya 1 den fazla kişiyi tagledin!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
+          message.delete({ timeout: 1000});
         }
       }
       else
       {
-        message.reply(message.author.toString() + prefix +manRegisterCommand + "/" + womanRegisterCommand + " @kişi ism yaş").then(msg => {msg.delete({ timeout: 2000 })}).catch(console.error);
-        message.delete({ timeout: 2000});
+        message.reply(message.author.toString() + prefix +manRegisterCommand + "/" + womanRegisterCommand + " @kişi ism yaş").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
+        message.delete({ timeout: 1000});
       }
     }
     else
     {
-      message.reply(message.author.toString() + " Bu komutu kullanmak için yetkin yok!").then(msg => {msg.delete({ timeout: 2000 })}).catch(console.error);
-      message.delete({ timeout: 2000});
+      message.reply(message.author.toString() + " Bu komutu kullanmak için yetkin yok!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
+      message.delete({ timeout: 1000});
     }
   }
   else if(message.channel.id === commandChannel.id)
