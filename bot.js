@@ -50,7 +50,7 @@ client.on('ready', () =>
   client.user.setPresence({
         status: "online", 
         game: {
-            name: "test,
+            name: "test",
             type: "PLAYING"
         }
     });
