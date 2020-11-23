@@ -125,13 +125,19 @@ client.on("message", message =>
         const temp = new Discord.MessageEmbed()
         .setColor('#0099ff')
         .setTitle(configJson.BotName + " Bot Ayarları");
-        const temp2 = new Discord.MessageEmbed()
-        .setColor('#0099ff')
-        .setTitle(configJson.BotName + " Bot Ayarları");
+        var counter = 0;
         for (const [key, value] of Object.entries(configJson)) 
         {
-          temp.addField("** **", "**"+ key + ":** " + value , false);
-          temp2.addField("**key" + ":** " + value, "** **" , false);
+          if(counter == 2)
+          {
+            temp.addField(key, value , true);
+            counter = 0;
+          }
+          else
+          {
+            temp.addField(key, value , true);
+            counter = counter + 1;
+          }          
         }
         commandChannel.send(temp);
       }
