@@ -56,8 +56,9 @@ client.on("message", message =>
         {
           if(args[0] === prefix + manRegisterCommand || args[0] == prefix + womanRegisterCommand)
           {
-            const taggedUser = message.mentions.users.first();
-            if(!taggedUser.roles.has(manRole) && !taggedUser.roles.has(womanRole))
+            const temp = message.mentions.users.first().id;
+            const taggedUser = guild.members.cache.get(temp);
+            if(!taggedUser.roles.cache.has(manRole) && !taggedUser.roles.cache.has(womanRole))
             {
               var username = args[2] + " | " + args[3];
               taggedUser.setNickname(username);
