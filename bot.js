@@ -25,6 +25,7 @@ function saveConfig()
 }
 function updateConfig()
 {
+  botName = configJson.BotName;
   client.user.setUsername(botName);
   manRole = guild.roles.cache.get(configJson.ManRole);
   womanRole = guild.roles.cache.get(configJson.WomanRole);
@@ -39,7 +40,6 @@ function updateConfig()
 client.on('ready', () =>
 {
   guild = client.guilds.cache.get("773638840002543618");
-  botName = "Nyän | Register";
   updateConfig();
   console.log(botName + " Bot Enabled!");
 });
@@ -121,25 +121,21 @@ client.on("message", message =>
   {
     if(message.member.hasPermission("ADMINISTRATOR"))
     {
-        var counter = 1;
         const temp = new Discord.MessageEmbed()
         .setColor('#0099ff')
         .setTitle(botName + " Bot Ayarları");
-        temp.addField(counter++ + ".Prefix:", prefix, true);
-        temp.addField("** **", "** **", true);
-        temp.addField("** **", "** **", true);
       
-        temp.addField(counter++ + ".ManRole:", manRole.toString(), true);
-        temp.addField(counter++ + ".WomanRole:", womanRole.toString(), true);
-        temp.addField(counter++ + ".UnregisterRole:", unregisterRole.toString(), true);
+        temp.addField("1.ManRole:", manRole.toString(), true);
+        temp.addField("2.WomanRole:", womanRole.toString(), true);
+        temp.addField("3.UnregisterRole:", unregisterRole.toString(), true);
       
-        temp.addField(counter++ + ".RegisterChannel:", registerChannel.toString(), true);
-        temp.addField(counter++ + ".CommandChannel:", commandChannel.toString(), true);
-        temp.addField("** **", "** **", true);
+        temp.addField("4.RegisterChannel:", registerChannel.toString(), true);
+        temp.addField("5.CommandChannel:", commandChannel.toString(), true);
+        temp.addField("6.Prefix:", prefix, true);
       
-        temp.addField(counter++ + ".ManRegisterCommand:", manRegisterCommand, true);
-        temp.addField(counter++ + ".WomanRegisterCommand:", womanRegisterCommand, true);
-        temp.addField("** **", "** **", true);
+        temp.addField("7.ManRegisterCommand:", manRegisterCommand, true);
+        temp.addField("8.WomanRegisterCommand:", womanRegisterCommand, true);
+        temp.addField("9.BotName::", botName, true);
         commandChannel.send(temp);
     }
     else
