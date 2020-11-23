@@ -49,7 +49,9 @@ client.on("message", message =>
     return;
   if(message.channel.id === registerChannel.id)
   {
-    if(message.member.hasPermission("MANAGE_ROLES"))
+    if(args[0] === prefix + manRegisterCommand  || args[0] === prefix + womanRegisterCommand)
+    {
+     if(message.member.hasPermission("MANAGE_ROLES"))
     {
       var args = message.content.split(" ");
       if(args.length === 4)
@@ -97,16 +99,12 @@ client.on("message", message =>
           message.delete({ timeout: 1000});
         }
       }
-      else
-      {
-        message.reply(prefix +manRegisterCommand + "/" + womanRegisterCommand + " @kişi isim yaş").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
-        message.delete({ timeout: 1000});
-      }
     }
     else
     {
       message.reply("Bu komutu kullanmak için yetkin yok!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
       message.delete({ timeout: 1000});
+    } 
     }
   }
   else if(message.channel.id === commandChannel.id)
