@@ -209,6 +209,9 @@ client.on("message", message =>
             message.reply("Yanlış index girdiniz!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
             message.delete({ timeout: 1000});
           }
+          message.reply("Başarıyla Değiştirildi!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
+          message.delete({ timeout: 1000});
+          updateConfig();
         }
         else
         {
