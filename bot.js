@@ -54,7 +54,7 @@ client.on("message", message =>
       {
         if(message.mentions.users.size === 1)
         {
-          if(args[0] === prefix + ManRegisterCommand || args[0] == prefix + WomanRegisterCommand)
+          if(args[0] === prefix + manRegisterCommand || args[0] == prefix + womanRegisterCommand)
           {
             const taggedUser = message.mentions.users.first();
             if(!taggedUser.roles.cache.has(manRole) && !taggedUser.roles.cache.has(womanRole))
