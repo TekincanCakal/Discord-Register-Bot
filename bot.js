@@ -56,21 +56,20 @@ client.on("message", message =>
         {
           if(args[0] === prefix + manRegisterCommand || args[0] == prefix + womanRegisterCommand)
           {
-            const temp = message.mentions.users.first().id;
-            const taggedUser = guild.members.cache.get(temp);
+            const taggedUser = guild.members.cache.get(message.mentions.users.first().id);
             if(!taggedUser.roles.cache.has(manRole) && !taggedUser.roles.cache.has(womanRole))
             {
               var username = args[2] + " | " + args[3];
               taggedUser.setNickname(username);
               if(args[0] === prefix + manRegisterCommand)
               {
-                member.roles.add(manRole).catch(console.error);
+                taggedUser.roles.add(manRole).catch(console.error);
               }
               else
               {
-                member.roles.add(womanRole).catch(console.error);
+                taggedUser.roles.add(womanRole).catch(console.error);
               }
-              member.roles.remove(unregisterRole).catch(console.error);
+              taggedUser.roles.remove(unregisterRole).catch(console.error);
             }
             else
             {
@@ -80,8 +79,8 @@ client.on("message", message =>
           }
           else
           {
-            message.reply(message.author.toString() + prefix +manRegisterCommand + "/" + womanRegisterCommand + " @kişi ism yaş");
-           message.delete({ timeout: 2000});
+            message.reply(message.author.toString() + prefix + manRegisterCommand + "/" + womanRegisterCommand + " @kişi ism yaş");
+            message.delete({ timeout: 2000});
           }
         }
         else
