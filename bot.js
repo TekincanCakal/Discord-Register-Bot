@@ -124,7 +124,7 @@ client.on("message", message =>
         const counter = 0;
         const temp = new Discord.MessageEmbed()
         .setColor('#0099ff')
-        .setTitle(BotName + " Bot Ayarları")
+        .setTitle(botName + " Bot Ayarları")
         .addField(counter++ + "Prefix:", prefix, false)
         .addField(counter++ + "ManRole:", manRole.toString(), false)
         .addField(counter++ + "WomanRole:", womanRole.toString(), false)
