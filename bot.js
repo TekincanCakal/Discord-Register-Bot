@@ -48,10 +48,10 @@ client.on('ready', () =>
   console.log(botName + " Bot Enabled!");
   
   client.user.setPresence({
-        status: "online",  // You can show online, idle... Do not disturb is dnd
+        status: "online", 
         game: {
-            name: memberCount()+" Kişi Bu Sunucuda",  // The message shown
-            type: "PLAYING" // PLAYING, WATCHING, LISTENING, STREAMING,
+            name: "test,
+            type: "PLAYING"
         }
     });
 });
