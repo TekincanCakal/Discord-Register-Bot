@@ -175,7 +175,7 @@ client.on("message", message =>
     else
     {
       message.reply(message.author.toString() + " Bu komutu kullanmak için yetkin yok!");
-     message.delete({ timeout: 2000});
+      message.delete({ timeout: 2000});
     }
   }
   else if(message.channel.id === commandChannel.id)
