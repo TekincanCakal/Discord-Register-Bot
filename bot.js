@@ -1,13 +1,6 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 client.login("NzQ3ODc1ODE5NzgyOTMwNDYy.X0VPog.kFEWtSaN0UH6saxySI7qqCJvGU8");
-var con = mysql.createConnection(
-{
-  host: "remotemysql.com",
-  user: "79KguD9kSz",
-  password: "sk5CzWKzD0",
-  database: "79KguD9kSz"
-});
 var configJson = require("./config.json");
 var guild;
 var manRole;
