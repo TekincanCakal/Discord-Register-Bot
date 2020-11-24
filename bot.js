@@ -41,12 +41,8 @@ function loadConfig()
   var sql = "SELECT * FROM RegisterBotConfig WHERE id = 0";
     con.query(sql, function (err, result, fields) 
     {
-      if (err) 
-      {
-        console.log("error: " + err.message);
-      }
-      console.log(result[0].BotName);
-      configJson = result[0];
+      if (err) console.log("error: " + err.message);
+      configJson = JSON.parse(result[0]);
       closeMysql();
     });
   
@@ -60,10 +56,6 @@ function connectMysql()
       console.log("error: " + err.message);
       throw err;
     }
-    else
-    {
-      console.log("Connection succesfuly opned");
-    }
   });
 }
 function closeMysql()
@@ -71,7 +63,6 @@ function closeMysql()
   con.end(function(err)
   {
     if (err) throw err;
-    else console.log("Connection succesfuly closed");
   });
 }
 function memberCount()
