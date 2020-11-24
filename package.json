@@ -18,6 +18,6 @@
   },
   "homepage": "https://github.com/chasen48/DiscordBotTest#readme",
   "dependencies": {
-    "discord.js": "^12.4.1
+    "discord.js": "^12.4.1"
   }
 }
