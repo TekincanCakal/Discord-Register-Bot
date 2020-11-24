@@ -42,7 +42,7 @@ async function loadConfig()
     {
       if (err) throw err;
     console.log("Connected!");
-    await con.query("SELECT * FROM RegisterBotConfig WHERE id = 0", function (err, rows, fields) {
+    await con.query("SELECT * FROM RegisterBotConfig WHERE id = 0", async function (err, rows, fields) {
     if (err) throw err;
     configJson = rows[0];
     });   
