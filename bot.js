@@ -37,7 +37,7 @@ function updateConfig()
 }
 function loadConfig()
 {
-  if(connectMysql())
+  if(connectMysql() === true)
   {
     var sql = "UPDATE RegisterBotConfig SET Prefix = '.' WHERE id = '0'";
     con.query(sql, function (err, result, fields) 
