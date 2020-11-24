@@ -9,7 +9,7 @@ var con = mysql.createConnection(
   password: "sk5CzWKzD0",
   database: "79KguD9kSz"
 });
-var configJson = loadConfig();
+var configJson;
 var guild;
 var manRole;
 var womanRole;
@@ -39,7 +39,7 @@ function loadConfig()
 {
   connectMysql();
   var sql = "SELECT * FROM RegisterBotConfig WHERE id = 0";
-  return con.query(sql, function (err, result, fields) 
+  configJson = con.query(sql, function (err, result, fields) 
   {
       if (err) console.log("error: " + err.message);
       closeMysql();
