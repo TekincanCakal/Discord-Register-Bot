@@ -39,10 +39,11 @@ async function loadConfig()
 {
   connectMysql();
   var sql = "SELECT * FROM RegisterBotConfig WHERE id = 0";
-  var test = await con.query(sql, function (err, result, fields) 
+  var test;
+  await con.query(sql, function (err, result, fields) 
   {
       if (err) console.log("error: " + err.message);
-      return result;
+      test = result[0];
   });
   closeMysql();
   console.log(test);
