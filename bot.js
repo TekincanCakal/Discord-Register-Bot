@@ -19,7 +19,7 @@ var commandChannel;
 function updateMysql()
 {
   connectMysql();
-  var sql = "UPDATE RegisterBotConfig SET BotName = 'test' WHERE id = 0";
+  var sql = "SELECT * FROM RegisterBotConfig";
   return new Promise((resolve,reject) => 
   {
     con.query(sql, function (err, result) 
