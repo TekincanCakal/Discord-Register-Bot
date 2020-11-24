@@ -73,39 +73,39 @@ client.on("message", (message) =>
           if(message.mentions.users.size === 1)
           {
             const taggedUser = guild.members.cache.get(message.mentions.users.first().id);
-            if(!taggedUser.roles.cache.has(manRole) && !taggedUser.roles.cache.has(womanRole))
+            if(!(taggedUser.roles.cache.has(manRole) || taggedUser.roles.cache.has(womanRole)))
+            {
+              var username = args[2] + " | " + args[3];
+              taggedUser.setNickname(username);
+              if(args[0] === configJson.Prefix + configJson.ManRegisterCommand)
               {
-                var username = args[2] + " | " + args[3];
-                taggedUser.setNickname(username);
-                if(args[0] === configJson.Prefix + configJson.ManRegisterCommand)
-                {
-                  taggedUser.roles.add(manRole).catch(console.error);
-                }
-                else
-                {
-                  taggedUser.roles.add(womanRole).catch(console.error);
-                }
-                taggedUser.roles.remove(unregisterRole).catch(console.error);
-                registerChannel.messages.fetch({ limit: 50 }).then(async messages => 
-                {
-                  for (const message of messages.array().reverse())
-                  {
-                    for(var i = 0; i < message.embeds.length; i++) 
-                    {
-                      if(message.embeds[i].title === taggedUser.id) 
-                      {
-                        message.delete({ timeout: 0 });
-                      }
-                    }
-                  }
-                });
-                message.delete({ timeout: 100});
+                taggedUser.roles.add(manRole).catch(console.error);
               }
               else
               {
-                message.reply("Bu kullanıcı zaten kayıtlı!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
-                message.delete({ timeout: 1000});
+                taggedUser.roles.add(womanRole).catch(console.error);
               }
+              taggedUser.roles.remove(unregisterRole).catch(console.error);
+              registerChannel.messages.fetch({ limit: 50 }).then(async messages => 
+              {
+                for (const message of messages.array().reverse())
+                {
+                  for(var i = 0; i < message.embeds.length; i++) 
+                  {
+                    if(message.embeds[i].title === taggedUser.id) 
+                    {
+                      message.delete({ timeout: 0 });
+                    }
+                  }
+                }
+              });
+              message.delete({ timeout: 100});
+            }
+            else
+            {
+              message.reply("Bu kullanıcı zaten kayıtlı!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
+              message.delete({ timeout: 1000});
+            }
           }
           else
           {
