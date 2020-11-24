@@ -63,10 +63,10 @@ function memberCount()
 {
    return guild.members.cache.filter(member => !member.user.bot).size; 
 }
-client.on('ready', () =>
+client.on('ready', async () =>
 {
   guild = client.guilds.cache.get("773638840002543618");
-  loadConfig();
+  await loadConfig();
   console.log(configJson.BotName + " Bot Enabled!");
   //client.user.setActivity(memberCount() + " Kişi Bu Sunucuda"); 
 });
