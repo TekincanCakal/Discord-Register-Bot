@@ -45,7 +45,7 @@ function loadConfig()
       {
         console.log("error: " + err.message);
       }
-      console.log(result[0].BotName];
+      console.log(result[0].BotName]);
       configJson = result[0];
       closeMysql();
     });
