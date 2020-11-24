@@ -43,6 +43,8 @@ function loadConfig()
   {
       if (err) console.log("error: " + err.message);
       closeMysql();
+      configJson = result[0];
+      console.log(configjson.BotName);
       return result;
   });
 }
