@@ -24,6 +24,14 @@ function updateConfig()
   unregisterRole = guild.roles.cache.get(configJson.UnregisterRole);
   registerChannel = guild.channels.cache.get(configJson.RegisterChannel);
   commandChannel = guild.channels.cache.get(configJson.CommandChannel);
+  return new Promise((resolve,reject) =>{
+      con.query("UPDATE RegisterBotConfig SET BotName = 'test' WHERE id = 0", function (err, rows, fields) 
+        {
+          if (err)return reject("Error");
+          con.end();
+          resolve();
+        });
+  });
 }
 function loadConfig()
 {
@@ -53,7 +61,7 @@ client.on("ready", async () =>
 {
   guild = client.guilds.cache.get("773638840002543618");
   await loadConfig();
-  updateConfig();
+  await updateConfig();
   console.log(configJson.BotName + " Bot Enabled!");
   client.user.setActivity(memberCount() + " Kişi Bu Sunucuda"); 
 });
