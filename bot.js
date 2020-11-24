@@ -115,7 +115,7 @@ client.on("message", (message) =>
         }
          else
           {
-            message.reply(prefix + manRegisterCommand + "/" + womanRegisterCommand + "@kişi isim yaş").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
+            message.reply(configJson.Prefix + configJson.ManRegisterCommand + "/" + configJson.WomanRegisterCommand + "@kişi isim yaş").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
             message.delete({ timeout: 1000});
           }
       }
