@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const mysql = require('mysql');
+var mysql = require('mysql');
 const client = new Discord.Client();
 client.login("NzQ3ODc1ODE5NzgyOTMwNDYy.X0VPog.kFEWtSaN0UH6saxySI7qqCJvGU8");
 var con = mysql.createConnection(
