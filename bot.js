@@ -42,9 +42,11 @@ function loadConfig()
         {
           if (err)return reject("Error");
           configJson = rows[0];
+          con.end();
+          resolve();
         });
   });
-  con.end();
+  
 }
 function connectMysql()
 {
