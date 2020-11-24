@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-var mysql = require('mysql');
+const mysql = require('mysql');
 const client = new Discord.Client();
 client.login("NzQ3ODc1ODE5NzgyOTMwNDYy.X0VPog.kFEWtSaN0UH6saxySI7qqCJvGU8");
 var con = mysql.createConnection(
@@ -39,13 +39,12 @@ function loadConfig()
 {
   connectMysql();
   var sql = "SELECT * FROM RegisterBotConfig WHERE id = 0";
-    con.query(sql, function (err, result, fields) 
-    {
+  con.query(sql, function (err, result, fields) 
+  {
       if (err) console.log("error: " + err.message);
-      configJson = JSON.parse(result[0]);
+      configJson = result[0];
       closeMysql();
-    });
-  
+  });
 }
 function connectMysql()
 {
