@@ -16,26 +16,8 @@ var womanRole;
 var unregisterRole;
 var registerChannel;
 var commandChannel;
-function updateMysql()
+function updateConfig()
 {
-  connectMysql();
-  var sql = "SELECT * FROM RegisterBotConfig";
-  return new Promise((resolve,reject) => 
-  {
-    con.query(sql, function (err, result) 
-  {
-    if (err) 
-    {
-      console.log("error: " + err.message);
-    }
-      con.end();
-      resolve();
-  });
-  });
-}
-async function updateConfig()
-{
-  await updateMysql();
   client.user.setUsername(configJson.BotName);
   manRole = guild.roles.cache.get(configJson.ManRole);
   womanRole = guild.roles.cache.get(configJson.WomanRole);
