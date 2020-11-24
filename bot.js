@@ -1,5 +1,4 @@
 const Discord = require("discord.js");
-const mysql = require('mysql');
 const client = new Discord.Client();
 client.login("NzQ3ODc1ODE5NzgyOTMwNDYy.X0VPog.kFEWtSaN0UH6saxySI7qqCJvGU8");
 var con = mysql.createConnection(
@@ -9,15 +8,15 @@ var con = mysql.createConnection(
   password: "sk5CzWKzD0",
   database: "79KguD9kSz"
 });
-var configJson;
+var configJson = require("./config.json");
 var guild;
 var manRole;
 var womanRole;
 var unregisterRole;
 var registerChannel;
-var commandChannel;
-function updateConfig()
-{
+
+function loadConfig()
+{  
   client.user.setUsername(configJson.BotName);
   manRole = guild.roles.cache.get(configJson.ManRole);
   womanRole = guild.roles.cache.get(configJson.WomanRole);
@@ -25,35 +24,14 @@ function updateConfig()
   registerChannel = guild.channels.cache.get(configJson.RegisterChannel);
   commandChannel = guild.channels.cache.get(configJson.CommandChannel);
 }
-function loadConfig()
-{
-  connectMysql();
-  return new Promise((resolve,reject) =>{
-      con.query("SELECT * FROM RegisterBotConfig WHERE id = 0", function (err, rows, fields) 
-        {
-          if (err)return reject("Error");
-          configJson = rows[0];
-          con.end();
-          resolve();
-        });
-  });
-}
-function connectMysql()
-{
-  con.connect(function(err) 
-  {
-    if (err)console.log("Error: " + err.message);
-  });    
-}
 function memberCount()
 {
    return guild.members.cache.filter(member => !member.user.bot).size; 
 }
-client.on("ready", async () =>
+client.on("ready", () =>
 {
   guild = client.guilds.cache.get("773638840002543618");
-  await loadConfig();
-  updateConfig();
+  loadConfig();
   console.log(configJson.BotName + " Bot Enabled!");
   client.user.setActivity(memberCount() + " Kişi Bu Sunucuda"); 
 });
@@ -124,111 +102,6 @@ client.on("message", (message) =>
         message.reply("Bu komutu kullanmak için yetkin yok!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
         message.delete({ timeout: 1000});
       } 
-    }
-  }
-  else if(message.channel.id === commandChannel.id)
-  {
-    if(message.member.hasPermission("ADMINISTRATOR"))
-    {
-      if(message.mentions.users.size && message.mentions.users.first().id === client.user.id)
-      {
-        var args = message.content.trim().split(" ");
-        if(args.length === 1)
-        {
-          const temp = new Discord.MessageEmbed()
-          .setColor('#0099ff')
-          .setTitle(configJson.BotName + " Bot Ayarları");
-          temp.addField("1.ManRole:", manRole.toString(), true);
-          temp.addField("2.WomanRole:", womanRole.toString(), true);
-          temp.addField("3.UnregisterRole:", unregisterRole.toString(), true);
-          temp.addField("4.RegisterChannel:", registerChannel.toString(), true);
-          temp.addField("5.CommandChannel:", commandChannel.toString(), true);
-          temp.addField("6.BotName:", configJson.BotName, true);
-          temp.addField("7.ManRegisterCommand:", configJson.ManRegisterCommand, true);
-          temp.addField("8.WomanRegisterCommand:", configJson.WomanRegisterCommand, true);
-          temp.addField("9.Prefix:", configJson.Prefix, true);
-          commandChannel.send(temp);
-          commandChannel.send("<@747875819782930462> <AyarSıraNo> <Tag/String>");
-        }
-        else if(args.length === 3)
-        {
-          var index = parseInt(args[1]);
-          if(index >= 1 && index <= 9)
-          {
-            if(index >= 1 && index <= 5)
-            {
-              if(args[2].length === 18)
-              {
-                if(index === 1)
-                {
-                  configJson.ManRole = args[2];
-                }
-                else if(index === 2)
-                {
-                  configJson.WomanRole = args[2];
-                }
-                else if(index === 3)
-                {
-                  configJson.UnregisterRole = args[2];
-                }
-                else if(index === 4)
-                {
-                  configJson.RegisterChannel = args[2];
-                }
-                else if(index === 5)
-                {
-                  configJson.CommandChannel = args[2];
-                }
-              }
-              else
-              {
-                message.reply("Yanlış kanal/rol idsi girdiniz!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
-                message.delete({ timeout: 1000});
-              } 
-            }
-            else if(index === 6)
-            {
-              configJson.BotName = args[2];
-            }
-            else
-            {
-              if(index == 7)
-              {
-                configJson.ManRegisterCommand = args[2];
-              }
-              else if(index == 8)
-              {
-                configJson.WomanRegisterCommand = args[2];
-              }
-              else if(index == 9)
-              {
-                if(args[2].length === 1)
-                {
-                  configJson.Prefix = args[2];
-                }
-                else
-                {
-                  message.reply("Prefix sadece tek karakterden oluşmalıdır!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
-                  message.delete({ timeout: 1000});
-                } 
-              }
-            }
-          }
-          else
-          {
-            message.reply("Yanlış index girdiniz!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
-            message.delete({ timeout: 1000});
-          }
-          message.reply("Başarıyla Değiştirildi!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
-          message.delete({ timeout: 1000});
-          updateConfig();
-        }
-      }
-    }
-    else
-    {
-      message.reply("Bu komutu kullanmak için yetkin yok!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
-      message.delete({ timeout: 1000});
     }
   }
 });
