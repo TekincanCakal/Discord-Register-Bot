@@ -38,7 +38,7 @@ function updateConfig()
 function loadConfig()
 {
   connectMysql();
-  var sql = "UPDATE RegisterBotConfig SET Prefix = '.' WHERE id = '0'";
+  var sql = "SELECT * FROM RegisterBotConfig WHERE id = 0";
     con.query(sql, function (err, result, fields) 
     {
       if (err) 
