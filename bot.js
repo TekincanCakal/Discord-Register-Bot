@@ -37,8 +37,6 @@ function loadConfig()
           resolve();
         });
   });
-  
-  
 }
 function connectMysql()
 {
@@ -51,7 +49,7 @@ function memberCount()
 {
    return guild.members.cache.filter(member => !member.user.bot).size; 
 }
-client.on('ready', async () =>
+client.on("ready", async () =>
 {
   guild = client.guilds.cache.get("773638840002543618");
   await loadConfig();
