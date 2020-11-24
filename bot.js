@@ -65,7 +65,7 @@ client.on("ready", async () =>
   console.log(configJson.BotName + " Bot Enabled!");
   client.user.setActivity(memberCount() + " Kişi Bu Sunucuda"); 
 });
-client.on("message", message =>
+client.on("message", async (message) =>
 {
   if(message.author.bot || (message.channel.type === "dm" || message.guild === null) ||(message.channel.id !== registerChannel.id && message.channel.id !== commandChannel.id))
     return;
@@ -229,7 +229,7 @@ client.on("message", message =>
           }
           message.reply("Başarıyla Değiştirildi!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
           message.delete({ timeout: 1000});
-          updateConfig();
+          await updateConfig();
         }
       }
     }
