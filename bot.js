@@ -35,20 +35,17 @@ function updateConfig()
   registerChannel = guild.channels.cache.get(configJson.RegisterChannel);
   commandChannel = guild.channels.cache.get(configJson.CommandChannel);
 }
-function loadConfig()
+async function loadConfig()
 {
   connectMysql();
   var sql = "SELECT * FROM RegisterBotConfig WHERE id = 0";
-  con.query(sql, function (err, result, fields) 
+  var test = await con.query(sql, function (err, result, fields) 
   {
       if (err) console.log("error: " + err.message);
-      test(result[0]);
+      return result;
   });
   closeMysql();
-}
-function test(asd)
-{
-  configJson = asd;
+  console.log(test);
 }
 function connectMysql()
 {
@@ -75,9 +72,9 @@ function memberCount()
 client.on('ready', () =>
 {
   guild = client.guilds.cache.get("773638840002543618");
-  configJson = loadConfig();
-  console.log(configJson.BotName + " Bot Enabled!");
-  client.user.setActivity(memberCount() + " Kişi Bu Sunucuda"); 
+  loadConfig();
+  //console.log(configJson.BotName + " Bot Enabled!");
+  //client.user.setActivity(memberCount() + " Kişi Bu Sunucuda"); 
 });
 client.on("message", message =>
 {
