@@ -51,6 +51,7 @@ function loadConfig()
         });
   });
   
+  
 }
 function connectMysql()
 {
@@ -68,8 +69,9 @@ client.on('ready', async () =>
 {
   guild = client.guilds.cache.get("773638840002543618");
   await loadConfig();
+  updateConfig();
   console.log(configJson.BotName + " Bot Enabled!");
-  //client.user.setActivity(memberCount() + " Kişi Bu Sunucuda"); 
+  client.user.setActivity(memberCount() + " Kişi Bu Sunucuda"); 
 });
 client.on("message", message =>
 {
