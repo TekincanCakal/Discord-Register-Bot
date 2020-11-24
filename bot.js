@@ -63,6 +63,7 @@ function connectMysql()
     if (err) 
     {
       console.log("error: " + err.message);
+      throw err;
       return false;
     }
     else
