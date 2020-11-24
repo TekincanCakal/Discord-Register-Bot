@@ -35,7 +35,7 @@ function updateConfig()
   registerChannel = guild.channels.cache.get(configJson.RegisterChannel);
   commandChannel = guild.channels.cache.get(configJson.CommandChannel);
 }
-function loadConfig()
+async function loadConfig()
 {
   con.connect(function(err) 
   {
@@ -52,10 +52,10 @@ function memberCount()
 {
    return guild.members.cache.filter(member => !member.user.bot).size; 
 }
-client.on('ready', () =>
+client.on('ready', async function()
 {
   guild = client.guilds.cache.get("773638840002543618");
-  loadConfig();
+  await loadConfig();
   console.log(result);
   //console.log(configJson.BotName + " Bot Enabled!");
   //client.user.setActivity(memberCount() + " Kişi Bu Sunucuda"); 
