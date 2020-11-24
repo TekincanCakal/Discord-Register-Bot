@@ -72,6 +72,8 @@ client.on('ready', () =>
 {
   guild = client.guilds.cache.get("773638840002543618");
   configJson = loadConfig();
+  console.log(configJson);
+  console.log(configJson.BotName);
   console.log(configJson[0].BotName + " Bot Enabled!");
   client.user.setActivity(memberCount() + " Kişi Bu Sunucuda"); 
 });
