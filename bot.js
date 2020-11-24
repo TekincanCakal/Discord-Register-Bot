@@ -57,7 +57,7 @@ function connectMysql()
 {
   con.connect(function(err) 
   {
-    if (err)console.log("Error: " err.message);
+    if (err)console.log("Error: " + err.message);
       console.log("Connected!");
   });    
 }
