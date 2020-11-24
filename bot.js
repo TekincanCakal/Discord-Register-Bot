@@ -16,11 +16,11 @@ var womanRole;
 var unregisterRole;
 var registerChannel;
 var commandChannel;
-async function updateConfig()
+function updateMysql()
 {
   connectMysql();
   var sql = "UPDATE RegisterBotConfig SET BotName = '" + configJson.BotName + "', Prefix = '" + configJson.Prefix + "', ManRole = '" + configJson.ManRole + "', WomanRole = '" + configJson.WomanRole + "', UnregisterRole = '" + configJson.UnregisterRole + "', RegisterChannel = '" + configJson.RegisterChannel + "', CommandChannel = '" + configJson.CommandChannel + "', ManRegisterCommand = '" + configJson.manRegisterCommand + "', WomanRegisterCommand = '" + configJson.WomanRegisterCommand + "' WHERE id = 0"; 
-  await new Promise((resolve,reject) => {
+  return new Promise((resolve,reject) => {
     con.query(sql, function (err, result) 
   {
     if (err) 
@@ -31,6 +31,10 @@ async function updateConfig()
       resolve();
   });
   });
+}
+async function updateConfig()
+{
+  await updateMysql();
   client.user.setUsername(configJson.BotName);
   manRole = guild.roles.cache.get(configJson.ManRole);
   womanRole = guild.roles.cache.get(configJson.WomanRole);
