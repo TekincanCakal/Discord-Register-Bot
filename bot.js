@@ -19,8 +19,9 @@ var commandChannel;
 function updateMysql()
 {
   connectMysql();
-  var sql = "UPDATE RegisterBotConfig SET BotName = '" + configJson.BotName + "', Prefix = '" + configJson.Prefix + "', ManRole = '" + configJson.ManRole + "', WomanRole = '" + configJson.WomanRole + "', UnregisterRole = '" + configJson.UnregisterRole + "', RegisterChannel = '" + configJson.RegisterChannel + "', CommandChannel = '" + configJson.CommandChannel + "', ManRegisterCommand = '" + configJson.manRegisterCommand + "', WomanRegisterCommand = '" + configJson.WomanRegisterCommand + "' WHERE id = 0"; 
-  return new Promise((resolve,reject) => {
+  var sql = "UPDATE RegisterBotConfig SET BotName = 'test' WHERE id = 0";
+  return new Promise((resolve,reject) => 
+  {
     con.query(sql, function (err, result) 
   {
     if (err) 
@@ -62,7 +63,6 @@ function connectMysql()
   con.connect(function(err) 
   {
     if (err)console.log("Error: " + err.message);
-      console.log("Connected!");
   });    
 }
 function memberCount()
