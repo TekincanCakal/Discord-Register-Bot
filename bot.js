@@ -37,9 +37,8 @@ function updateConfig()
 }
 function loadConfig()
 {
-  if(connectMysql() === true)
-  {
-    var sql = "UPDATE RegisterBotConfig SET Prefix = '.' WHERE id = '0'";
+  connectMysql();
+  var sql = "UPDATE RegisterBotConfig SET Prefix = '.' WHERE id = '0'";
     con.query(sql, function (err, result, fields) 
     {
       if (err) 
@@ -49,11 +48,6 @@ function loadConfig()
       configJson = result[0];
       closeMysql();
     });
-  }
-  else
-  {
-    console.log("error: Config not loaded!");
-  }
   
 }
 function connectMysql()
@@ -64,12 +58,10 @@ function connectMysql()
     {
       console.log("error: " + err.message);
       throw err;
-      return false;
     }
     else
     {
       console.log("Connection succesfuly opned");
-      return true;
     }
   });
 }
