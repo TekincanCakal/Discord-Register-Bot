@@ -16,7 +16,6 @@ var womanRole;
 var unregisterRole;
 var registerChannel;
 var commandChannel;
-var result = []
 function updateConfig()
 {
   connectMysql();
@@ -44,8 +43,8 @@ async function loadConfig()
     con.query("SELECT * FROM RegisterBotConfig WHERE id = 0", function (err, rows, fields) {
     if (err) throw err;
     console.log('accountNumber is : ', rows[0].BotName);
-    result.push(rows[0].BotName);
-      console.log(result);
+    configJson = rows[0];
+      console.log(configJson.BotName);
 });        
     
 });  
@@ -58,6 +57,7 @@ client.on('ready', async function()
 {
   guild = client.guilds.cache.get("773638840002543618");
   await loadConfig();
+  config.log("test");
   //console.log(configJson.BotName + " Bot Enabled!");
   //client.user.setActivity(memberCount() + " Kişi Bu Sunucuda"); 
 });
