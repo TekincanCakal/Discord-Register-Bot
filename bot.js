@@ -39,7 +39,7 @@ function loadConfig()
 {
   connectMysql();
   var sql = "SELECT * FROM RegisterBotConfig WHERE id = 0";
-  configJson = con.query(sql, function (err, result, fields) 
+  con.query(sql, function (err, result, fields) 
   {
       if (err) console.log("error: " + err.message);
       closeMysql();
@@ -71,8 +71,7 @@ function memberCount()
 client.on('ready', () =>
 {
   guild = client.guilds.cache.get("773638840002543618");
-  loadConfig();
-  console.log(configJson[0]);
+  configJson = loadConfig();
   console.log(configJson[0].BotName + " Bot Enabled!");
   client.user.setActivity(memberCount() + " Kişi Bu Sunucuda"); 
 });
