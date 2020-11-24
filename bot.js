@@ -24,6 +24,9 @@ function updateConfig()
   unregisterRole = guild.roles.cache.get(configJson.UnregisterRole);
   registerChannel = guild.channels.cache.get(configJson.RegisterChannel);
   commandChannel = guild.channels.cache.get(configJson.CommandChannel);
+}
+function test()
+{
   return new Promise((resolve,reject) =>{
       con.query("UPDATE RegisterBotConfig SET BotName = 'test' WHERE id = 0", function (err, rows, fields) 
         {
@@ -61,11 +64,12 @@ client.on("ready", async () =>
 {
   guild = client.guilds.cache.get("773638840002543618");
   await loadConfig();
-  await updateConfig();
+  updateConfig();
+  await test();
   console.log(configJson.BotName + " Bot Enabled!");
   client.user.setActivity(memberCount() + " Kişi Bu Sunucuda"); 
 });
-client.on("message", async (message) =>
+client.on("message", (message) =>
 {
   if(message.author.bot || (message.channel.type === "dm" || message.guild === null) ||(message.channel.id !== registerChannel.id && message.channel.id !== commandChannel.id))
     return;
@@ -229,7 +233,7 @@ client.on("message", async (message) =>
           }
           message.reply("Başarıyla Değiştirildi!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
           message.delete({ timeout: 1000});
-          await updateConfig();
+          updateConfig();
         }
       }
     }
