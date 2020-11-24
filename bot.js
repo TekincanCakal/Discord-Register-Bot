@@ -36,7 +36,7 @@ function updateConfig()
 }
 async function loadConfig()
 {
-  con.connect(function(err) 
+  await con.connect(async function(err) 
   {
     try
     {
