@@ -39,12 +39,12 @@ function loadConfig()
 {
   connectMysql();
   var sql = "SELECT * FROM RegisterBotConfig WHERE id = 0";
-  con.query(sql, function (err, result, fields) 
+  configJson = con.query(sql, function (err, result, fields) 
   {
       if (err) console.log("error: " + err.message);
-      configJson = result[0];
       console.log(result[0].BotName);
       closeMysql();
+      return result[0];
   });
 }
 function connectMysql()
