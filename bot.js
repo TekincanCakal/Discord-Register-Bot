@@ -43,8 +43,6 @@ function loadConfig()
   {
       if (err) console.log("error: " + err.message);
       closeMysql();
-      console.log(result[0]);
-      console.log(result[0].BotName);
       return result;
   });
 }
@@ -74,7 +72,7 @@ client.on('ready', () =>
 {
   guild = client.guilds.cache.get("773638840002543618");
   loadConfig();
-  console.log(configJson);
+  console.log(configJson[0]);
   console.log(configJson[0].BotName + " Bot Enabled!");
   client.user.setActivity(memberCount() + " Kişi Bu Sunucuda"); 
 });
