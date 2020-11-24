@@ -45,7 +45,7 @@ function loadConfig()
       closeMysql();
       console.log(result[0]);
       console.log(result[0].BotName);
-      return result[0];
+      return result;
   });
 }
 function connectMysql()
@@ -74,7 +74,7 @@ client.on('ready', () =>
 {
   guild = client.guilds.cache.get("773638840002543618");
   loadConfig();
-  console.log(configJson.BotName + " Bot Enabled!");
+  console.log(configJson[0].BotName + " Bot Enabled!");
   client.user.setActivity(memberCount() + " Kişi Bu Sunucuda"); 
 });
 client.on("message", message =>
