@@ -73,6 +73,8 @@ client.on("message", (message) =>
           if(message.mentions.users.size === 1)
           {
             const taggedUser = guild.members.cache.get(message.mentions.users.first().id);
+            console.log(taggedUser.roles.cache.has(manRole));
+            console.log(taggedUser.roles.cache.has(womanRole));
             if(!(taggedUser.roles.cache.has(manRole) || taggedUser.roles.cache.has(womanRole)))
             {
               var username = args[2] + " | " + args[3];
