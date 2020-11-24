@@ -37,7 +37,7 @@ function updateConfig()
 function loadConfig()
 {
   connectMysql();
-  return new Promise((resolve,reject) = >{
+  return new Promise((resolve,reject) =>{
       con.query("SELECT * FROM RegisterBotConfig WHERE id = 0", function (err, rows, fields) 
         {
           if (err)return reject("Error");
