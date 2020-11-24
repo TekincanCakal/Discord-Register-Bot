@@ -45,7 +45,9 @@ async function loadConfig()
     if (err) throw err;
     console.log('accountNumber is : ', rows[0].BotName);
     result.push(rows[0].BotName);
+      console.log(result);
 });        
+    
 });  
 }
 function memberCount()
@@ -56,7 +58,6 @@ client.on('ready', async function()
 {
   guild = client.guilds.cache.get("773638840002543618");
   await loadConfig();
-  console.log(result);
   //console.log(configJson.BotName + " Bot Enabled!");
   //client.user.setActivity(memberCount() + " Kişi Bu Sunucuda"); 
 });
