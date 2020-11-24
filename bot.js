@@ -34,30 +34,25 @@ function updateConfig()
   registerChannel = guild.channels.cache.get(configJson.RegisterChannel);
   commandChannel = guild.channels.cache.get(configJson.CommandChannel);
 }
-async function loadConfig()
+function loadConfig()
 {
-  await con.connect(async function(err) 
-  {
-    try
-    {
-      if (err) throw err;
-      console.log("Connected!");
-      const query =  new Promise((resolve, reject) => 
-      {
-        con.query("SELECT * FROM RegisterBotConfig WHERE id = 0", function (err, rows, fields) 
+  connectMysql();
+  return new Promise((resolve,reject) = >{
+      con.query("SELECT * FROM RegisterBotConfig WHERE id = 0", function (err, rows, fields) 
         {
           if (err)return reject("Error");
           configJson = rows[0];
         });
-      });   
-      await query;
-    }
-    finally
-    {
-      con.end();
-      resolve();
-    }
-  });  
+  });
+  con.end();
+}
+function connectMysql()
+{
+  con.connect(function(err) 
+  {
+    if (err) throw err;
+      console.log("Connected!");
+  });    
 }
 function memberCount()
 {
