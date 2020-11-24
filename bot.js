@@ -36,18 +36,22 @@ function updateConfig()
 }
 async function loadConfig()
 {
-  con.connect(function(err) 
+  await con.connect(function(err) 
   {
-    if (err) throw err;
+    try
+    {
+      if (err) throw err;
     console.log("Connected!");
-    con.query("SELECT * FROM RegisterBotConfig WHERE id = 0", function (err, rows, fields) {
+    await con.query("SELECT * FROM RegisterBotConfig WHERE id = 0", function (err, rows, fields) {
     if (err) throw err;
-    console.log('accountNumber is : ', rows[0].BotName);
     configJson = rows[0];
-      console.log(configJson.BotName);
-});        
-    
-});  
+    });   
+    }
+    finally
+    {
+      con.end();
+    }
+  });  
 }
 function memberCount()
 {
@@ -56,8 +60,8 @@ function memberCount()
 client.on('ready', () =>
 {
   guild = client.guilds.cache.get("773638840002543618");
-  loadConfig().then(() => {console.log(configJson.Botname);});
-  //console.log(configJson.BotName + " Bot Enabled!");
+  await loadConfig();
+  console.log(configJson.BotName + " Bot Enabled!");
   //client.user.setActivity(memberCount() + " Kişi Bu Sunucuda"); 
 });
 client.on("message", message =>
