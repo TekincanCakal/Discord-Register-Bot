@@ -1,41 +1,83 @@
 const Discord = require("discord.js");
-const configJson = require('./config.json');
-const fs = require("fs");
 const client = new Discord.Client();
 client.login("NzQ3ODc1ODE5NzgyOTMwNDYy.X0VPog.kFEWtSaN0UH6saxySI7qqCJvGU8");
-
+var con = mysql.createConnection(
+{
+  host: "remotemysql.com",
+  user: "79KguD9kSz",
+  password: "sk5CzWKzD0",
+  database: "79KguD9kSz"
+});
+var configJson;
 var guild;
-var botName;
 var manRole;
 var womanRole;
 var unregisterRole;
-var manRegisterCommand;
-var womanRegisterCommand;
 var registerChannel;
 var commandChannel;
-var prefix;
 
-async function saveConfig()
-{
-  fs.writeFileSync('./config.json', JSON.stringify(configJson), function(err, result)
-  {
-     if(err)
-      console.log('error', err);
-  });
-}
 function updateConfig()
 {
-  botName = configJson.BotName;
-  client.user.setUsername(botName);
+  connectMysql();
+  var sql = "UPDATE RegisterBotConfig SET BotName = '" + configJson.BotName + "', Prefix = '" + configJson.Prefix + "', ManRole = '" + configJson.ManRole + "', WomanRole = '" + configJson.WomanRole + "', UnregisterRole = '" + configJson.UnregisterRole + "', RegisterChannel = '" + configJson.RegisterChannel + "', CommandChannel = '" + configJson.CommandChannel + "', ManRegisterCommand = '" + configJson.manRegisterCommand + "', WomanRegisterCommand = '" + configJson.WomanRegisterCommand + "' WHERE id = 0"; 
+  con.query(sql, function (err, result) 
+  {
+    if (err) 
+    {
+      console.log("error: " + err.message);
+    }
+  });
+  client.user.setUsername(configJson.BotName);
   manRole = guild.roles.cache.get(configJson.ManRole);
   womanRole = guild.roles.cache.get(configJson.WomanRole);
   unregisterRole = guild.roles.cache.get(configJson.UnregisterRole);
   registerChannel = guild.channels.cache.get(configJson.RegisterChannel);
   commandChannel = guild.channels.cache.get(configJson.CommandChannel);
-  manRegisterCommand = configJson.ManRegisterCommand;
-  womanRegisterCommand = configJson.WomanRegisterCommand;
-  prefix = configJson.Prefix;
-  saveConfig();
+}
+function loadConfig()
+{
+  if(connectMysql())
+  {
+    var sql = "UPDATE RegisterBotConfig SET Prefix = '.' WHERE id = '0'";
+    con.query(sql, function (err, result, fields) 
+    {
+      if (err) 
+      {
+        console.log("error: " + err.message);
+      }
+      configJson = result[0];
+      closeMysql();
+    });
+  }
+  else
+  {
+    console.log("error: Config not loaded!");
+  }
+  
+}
+function connectMysql()
+{
+  con.connect(function(err) 
+  {
+    if (err) 
+    {
+      console.log("error: " + err.message);
+      return false;
+    }
+    else
+    {
+      console.log("Connection succesfuly opned");
+      return true;
+    }
+  });
+}
+function closeMysql()
+{
+  con.end(function(err)
+  {
+    if (err) throw err;
+    else console.log("Connection succesfuly closed");
+  });
 }
 function memberCount()
 {
@@ -44,8 +86,8 @@ function memberCount()
 client.on('ready', () =>
 {
   guild = client.guilds.cache.get("773638840002543618");
-  updateConfig();
-  console.log(botName + " Bot Enabled!");
+  loadConfig();
+  console.log(configJson.BotName + " Bot Enabled!");
   client.user.setActivity(memberCount() + " Kişi Bu Sunucuda"); 
 });
 client.on("message", message =>
@@ -55,7 +97,7 @@ client.on("message", message =>
   if(message.channel.id === registerChannel.id)
   {
     var args = message.content.split(" ");
-    if(args[0] === prefix + manRegisterCommand  || args[0] === prefix + womanRegisterCommand)
+    if(args[0] === configJson.Prefix + configJson.ManRegisterCommand  || args[0] === configJson.Prefix + configJson.WomanRegisterCommand)
     {
       if(message.member.hasPermission("MANAGE_ROLES"))
       {
@@ -68,7 +110,7 @@ client.on("message", message =>
               {
                 var username = args[2] + " | " + args[3];
                 taggedUser.setNickname(username);
-                if(args[0] === prefix + manRegisterCommand)
+                if(args[0] === configJson.Prefix + configJson.ManRegisterCommand)
                 {
                   taggedUser.roles.add(manRole).catch(console.error);
                 }
@@ -121,23 +163,23 @@ client.on("message", message =>
   {
     if(message.member.hasPermission("ADMINISTRATOR"))
     {
-      if(message.mentions.users.size && message.mentions.users.first().id === "747875819782930462")
+      if(message.mentions.users.size && message.mentions.users.first().id === client.user.id)
       {
         var args = message.content.trim().split(" ");
         if(args.length === 1)
         {
           const temp = new Discord.MessageEmbed()
           .setColor('#0099ff')
-          .setTitle(botName + " Bot Ayarları");
+          .setTitle(configJson.BotName + " Bot Ayarları");
           temp.addField("1.ManRole:", manRole.toString(), true);
           temp.addField("2.WomanRole:", womanRole.toString(), true);
           temp.addField("3.UnregisterRole:", unregisterRole.toString(), true);
           temp.addField("4.RegisterChannel:", registerChannel.toString(), true);
           temp.addField("5.CommandChannel:", commandChannel.toString(), true);
-          temp.addField("6.BotName:", botName, true);
-          temp.addField("7.ManRegisterCommand:", manRegisterCommand, true);
-          temp.addField("8.WomanRegisterCommand:", womanRegisterCommand, true);
-          temp.addField("9.Prefix:", prefix, true);
+          temp.addField("6.BotName:", configJson.BotName, true);
+          temp.addField("7.ManRegisterCommand:", configJson.ManRegisterCommand, true);
+          temp.addField("8.WomanRegisterCommand:", configJson.WomanRegisterCommand, true);
+          temp.addField("9.Prefix:", configJson.Prefix, true);
           commandChannel.send(temp);
           commandChannel.send("<@747875819782930462> <AyarSıraNo> <Tag/String>");
         }
