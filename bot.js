@@ -57,7 +57,7 @@ function memberCount()
 {
    return guild.members.cache.filter(member => !member.user.bot).size; 
 }
-client.on('ready', () =>
+client.on('ready', async function()
 {
   guild = client.guilds.cache.get("773638840002543618");
   await loadConfig();
