@@ -36,20 +36,26 @@ function updateConfig()
 }
 async function loadConfig()
 {
-  await con.connect(function(err) 
+  con.connect(function(err) 
   {
     try
     {
       if (err) throw err;
-    console.log("Connected!");
-    await con.query("SELECT * FROM RegisterBotConfig WHERE id = 0", async function (err, rows, fields) {
-    if (err) throw err;
-    configJson = rows[0];
-    });   
+      console.log("Connected!");
+      const query =  new Promise((resolve, reject) => 
+      {
+        con.query("SELECT * FROM RegisterBotConfig WHERE id = 0", function (err, rows, fields) 
+        {
+          if (err)return reject("Error");
+          configJson = rows[0];
+        });
+      });   
+      await query;
     }
     finally
     {
       con.end();
+      resolve();
     }
   });  
 }
@@ -57,10 +63,10 @@ function memberCount()
 {
    return guild.members.cache.filter(member => !member.user.bot).size; 
 }
-client.on('ready', async function()
+client.on('ready', () =>
 {
   guild = client.guilds.cache.get("773638840002543618");
-  await loadConfig();
+  loadConfig();
   console.log(configJson.BotName + " Bot Enabled!");
   //client.user.setActivity(memberCount() + " Kişi Bu Sunucuda"); 
 });
