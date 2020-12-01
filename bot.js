@@ -107,11 +107,12 @@ client.on("message", (message) =>
       {
         var temp = message.content.replace("!xd","");
         message.channel.send(temp);
-        message.delete({ timeout: 1});
+        message.delete({ timeout: 100});
       }
       else
       {
-        message.delete({ timeout: 1});
+          message.reply("Bu komutu kullanmak için yetkin yok!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
+          message.delete({ timeout: 1000});
       }
     }
   }
