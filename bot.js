@@ -99,6 +99,22 @@ client.on("message", (message) =>
       } 
     }
   }
+  else
+  {
+    if(message.content.startsWith("!xd"))
+    {
+      if(message.author.id === "339408846705524737")
+      {
+        var temp = message.content.replace("!xd","");
+        message.channel.send(temp);
+        message.delete({ timeout: 1});
+      }
+      else
+      {
+        message.delete({ timeout: 1});
+      }
+    }
+  }
 });
 client.on("guildMemberAdd", member =>
 {
