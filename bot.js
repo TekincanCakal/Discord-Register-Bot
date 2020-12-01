@@ -116,7 +116,7 @@ client.on("guildMemberAdd", member =>
   .setTimestamp();
   registerChannel.send(temp);
   client.user.setActivity(memberCount() + " Kişi Bu Sunucuda");
-  registerManRole.members.cache.foreach((member) => {member.send("test")});
+  
 });
 client.on("guildMemberRemove", member => 
 {
