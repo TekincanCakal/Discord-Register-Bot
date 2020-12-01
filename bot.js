@@ -116,6 +116,7 @@ client.on("guildMemberAdd", member =>
   .setTimestamp();
   registerChannel.send(temp);
   client.user.setActivity(memberCount() + " Kişi Bu Sunucuda");
+  guild.members.cache.filter(member => !member.user.roles.cache.has(registerManRole.id).cache.forEach(member => member.send("test"); 
   
 });
 client.on("guildMemberRemove", member => 
