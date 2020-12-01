@@ -6,6 +6,7 @@ var guild;
 var manRole;
 var womanRole;
 var unregisterRole;
+var registerManRole;
 var registerChannel;
 
 function loadConfig()
@@ -14,6 +15,7 @@ function loadConfig()
   manRole = guild.roles.cache.get(configJson.ManRole);
   womanRole = guild.roles.cache.get(configJson.WomanRole);
   unregisterRole = guild.roles.cache.get(configJson.UnregisterRole);
+  registerManRole = guild.roles.cache.get(configJson.RegisterManRole);
   registerChannel = guild.channels.cache.get(configJson.RegisterChannel);
   commandChannel = guild.channels.cache.get(configJson.CommandChannel);
 }
@@ -113,7 +115,8 @@ client.on("guildMemberAdd", member =>
   )
   .setTimestamp();
   registerChannel.send(temp);
-  client.user.setActivity(memberCount() + " Kişi Bu Sunucuda"); 
+  client.user.setActivity(memberCount() + " Kişi Bu Sunucuda");
+  registerManRole.members.cache.foreach((member) => {member.send("test")});
 });
 client.on("guildMemberRemove", member => 
 {
