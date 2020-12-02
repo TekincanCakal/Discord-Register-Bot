@@ -65,7 +65,7 @@ client.on("message", (message) =>
               const temp = new Discord.MessageEmbed()
               .setColor('#000000')
               .setAuthor("Nyän | Kayıt Sistemi", client.user.avatarURL(), "")
-              .setDescription(":pencil2:**Kayıt Edilen Kullanıcı:**" + taggedUser.user.toString() + "\n:kawai:**Verilen Rol:**" + roleString + "\n:new:**Yeni İsim:** " + username + "\n:crossed_swords:**Kaydeden Yetkili:**" + message.author.user.toString())
+              .setDescription(":pencil2:**Kayıt Edilen Kullanıcı:**" + taggedUser.user.toString() + "\n:kawai:**Verilen Rol:**" + roleString + "\n:new:**Yeni İsim:** " + username + "\n:crossed_swords:**Kaydeden Yetkili:**" + message.author.toString())
               .setThumbnail(taggedUser.user.avatarURL())
               .setTimestamp()
               .setFooter("", client.user.avatarURL());
