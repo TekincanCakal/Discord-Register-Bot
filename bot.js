@@ -117,10 +117,12 @@ client.on("message", (message) =>
 });
 client.on("guildMemberAdd", member =>
 {
+  const d = new Date( member.user.createdAt );
+  date = d.getDate() + "/" + d.getMonth() + "/" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes();
   const temp = new Discord.MessageEmbed()
   .setColor('#000000')
   .setAuthor("Nyän | Kayıt Sistemi", client.user.avatarURL(), "")
-  .setDescription(":pikachu:**Sunucumuza Hoşgeldin**" + member.user.toString() +"\n**Hesap Oluşturma Tarihi:** " + member.user.createdAt + "\n**Güvenilirlik Durumu:** Güvenilir :heavy_check_mark:\n:kedy: **Kayıt olmak için yetkilileri beklemen yeterlidir.**\n**Yetkililer sizinle ilgilenecektir.**")
+  .setDescription("**Sunucumuza Hoşgeldin**" + member.user.toString() +"\n**Hesap Oluşturma Tarihi:** " + date + "\n**Güvenilirlik Durumu:** Güvenilir :white_check_mark:\n:arrows_counterclockwise: **Kayıt olmak için yetkilileri beklemen yeterlidir.**\n**Yetkililer sizinle ilgilenecektir.**")
   .setThumbnail(member.user.avatarURL());
   //registerManRole.toString() + member.user.toString() + 
   registerChannel.send(temp);
