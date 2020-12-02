@@ -62,7 +62,6 @@ client.on("message", (message) =>
                 roleString = womanRole.toString();
               }
               taggedUser.roles.remove(unregisterRole).catch(console.error);
-              message.delete({ timeout: 100});
               const temp = new Discord.MessageEmbed()
               .setColor('#000000')
               .setAuthor("Nyän | Kayıt Sistemi", client.user.avatarURL(), "")
@@ -71,6 +70,7 @@ client.on("message", (message) =>
               .setTimestamp()
               .setFooter("", client.user.avatarURL());
               registerChannel.send(temp);
+              message.delete({ timeout: 100});
             }
             else
             {
