@@ -124,7 +124,7 @@ client.on("guildMemberAdd", member =>
   const temp = new Discord.MessageEmbed()
   .setColor('#000000')
   .setAuthor("Nyän | Kayıt Sistemi", client.user.avatarURL(), "")
-  .setDescription("**Sunucumuza Hoşgeldin**" + member.user.toString() +"\n**Hesap Oluşturma Tarihi:** " + date + "\n**:white_check_mark: Güvenilirlik Durumu:** Güvenilir\n:arrows_counterclockwise: **Kayıt olmak için yetkilileri beklemen yeterlidir.**\n**Yetkililer sizinle ilgilenecektir.**")
+  .setDescription(":door: **Sunucumuza Hoşgeldin**" + member.user.toString() +"\n:date: **Hesap Oluşturma Tarihi:** " + date + "\n**:white_check_mark: Güvenilirlik Durumu:** Güvenilir\n:arrows_counterclockwise: **Kayıt olmak için yetkilileri beklemen yeterlidir.**\n**Yetkililer sizinle ilgilenecektir.**")
   .setThumbnail(member.user.avatarURL());
   registerChannel.send(temp);
   client.user.setActivity(memberCount() + " Kişi Bu Sunucuda");
