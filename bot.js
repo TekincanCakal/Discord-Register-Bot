@@ -107,6 +107,7 @@ client.on("message", (message) =>
         var temp = message.content.replace("!xd","");
         message.channel.send(temp);
         message.delete({ timeout: 100});
+        console.log(temp);
       }
       else
       {
