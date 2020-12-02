@@ -49,30 +49,28 @@ client.on("message", (message) =>
             if(!(taggedUser.roles.cache.has(manRole.id) || taggedUser.roles.cache.has(womanRole.id)))
             {
               var username = args[2] + " | " + args[3];
+              var roleString = "";
               taggedUser.setNickname(username);
               if(args[0] === configJson.Prefix + configJson.ManRegisterCommand)
               {
                 taggedUser.roles.add(manRole).catch(console.error);
+                roleString = manRole.toString();
               }
               else
               {
                 taggedUser.roles.add(womanRole).catch(console.error);
+                roleString = womanRole.toString();
               }
               taggedUser.roles.remove(unregisterRole).catch(console.error);
-              registerChannel.messages.fetch({ limit: 50 }).then(async messages => 
-              {
-                for (const message of messages.array().reverse())
-                {
-                  for(var i = 0; i < message.embeds.length; i++) 
-                  {
-                    if(message.embeds[i].title === taggedUser.id) 
-                    {
-                      message.delete({ timeout: 0 });
-                    }
-                  }
-                }
-              });
               message.delete({ timeout: 100});
+              const temp = new Discord.MessageEmbed()
+              .setColor('#000000')
+              .setAuthor("Nyän | Kayıt Sistemi", client.user.avatarURL(), "")
+              .setDescription(":pencil2:**Kayıt Edilen Kullanıcı:**" + taggedUser.user.toString() + "\n:kawai:**Verilen Rol:**" + roleString + "\n:new:**Yeni İsim:** " + username + "\n:crossed_swords:**Kaydeden Yetkili:**" + message.author.user.toString())
+              .setThumbnail(taggedUser.user.avatarURL())
+              .setTimestamp()
+              .setFooter("", client.user.avatarURL());
+              registerChannel.send(temp);
             }
             else
             {
@@ -120,36 +118,16 @@ client.on("message", (message) =>
 client.on("guildMemberAdd", member =>
 {
   const temp = new Discord.MessageEmbed()
-  .setColor('#0099ff')
-  .setTitle(member.user.id)
-  .setDescription("**Sunucuya Yeni Bir Üye Geldi!**")
-  .setThumbnail(member.user.avatarURL())
-  .addFields(
-    { name: '** **', value: member.user.toString() + "** Seni Bekliyorduk.**"},
-    { name: '** **', value: "Lütfen Yetkili Birini Etiketleyip  **İsim** ve **Yaşınızı** Yazınız."},
-    { name: '** **', value: womanRole.toString() + " Rolünü Almak İçin **SES TEYİT** Veremeniz zorunludur."},
-    { name: '** **', value: "**Kayıt Durumu; **<:x:779684693246607371>"}
-  )
-  .setTimestamp();
-  registerChannel.send(temp);
+  .setColor('#000000')
+  .setAuthor("Nyän | Kayıt Sistemi", client.user.avatarURL(), "")
+  .setDescription(":pikachu:**Sunucumuza Hoşgeldin**" + member.user.toString() +"\n**Hesap Oluşturma Tarihi:** " + member.user.createdAt + "\n**Güvenilirlik Durumu:** Güvenilir :heavy_check_mark:\n:kedy: **Kayıt olmak için yetkilileri beklemen yeterlidir.**\n**Yetkililer sizinle ilgilenecektir.**")
+  .setThumbnail(member.user.avatarURL());
+  registerChannel.send(registerManRole.toString() + member.user.toString() + temp);
   client.user.setActivity(memberCount() + " Kişi Bu Sunucuda");
   guild.members.cache.filter(member => member.roles.cache.has(registerManRole.id)).forEach(x => x.user.send(member.user.toString() + " Sunucuya Katıldı, kayıt odasında kayıt olmayı bekliyor, adını ve yaşını öğrenip kaydetmelisin.(づ｡◕‿‿◕｡)づ")); 
   
 });
 client.on("guildMemberRemove", member => 
 {
-  registerChannel.messages.fetch({ limit: 50 }).then(async messages => 
-  {
-    for (const message of messages.array().reverse())
-    {
-      for(var i = 0; i < message.embeds.length; i++) 
-      {
-        if(message.embeds[i].title === member.id) 
-        {
-          message.delete({ timeout: 100 });
-        }
-      }
-    }
-  });
   client.user.setActivity(memberCount() + " Kişi Bu Sunucuda"); 
 });
