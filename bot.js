@@ -65,7 +65,8 @@ client.on("message", (message) =>
               const temp = new Discord.MessageEmbed()
               .setColor('#000000')
               .setAuthor("Nyän | Kayıt Sistemi", client.user.avatarURL(), "")
-              .setDescription(":pencil2:**Kayıt Edilen Kullanıcı:**" + taggedUser.user.toString() + "\n:kawai:**Verilen Rol:**" + roleString + "\n:new:**Yeni İsim:** " + username + "\n:crossed_swords:**Kaydeden Yetkili:**" + message.author.toString())
+              .setTitle("Kayıt Tamamlandı")
+              .setDescription(":pencil2:**Kayıt Edilen Kullanıcı:**" + taggedUser.user.toString() + "\n:gift: **Verilen Rol:**" + roleString + "\n:new: **Yeni İsim:** " + username + "\n:crossed_swords: **Kaydeden Yetkili: **" + message.author.toString())
               .setThumbnail(taggedUser.user.avatarURL())
               .setTimestamp()
               .setFooter("", client.user.avatarURL());
@@ -119,12 +120,12 @@ client.on("guildMemberAdd", member =>
 {
   const d = new Date( member.user.createdAt );
   date = d.getDate() + "/" + d.getMonth() + "/" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes();
+  registerChannel.send(registerManRole.toString() + member.user.toString());
   const temp = new Discord.MessageEmbed()
   .setColor('#000000')
   .setAuthor("Nyän | Kayıt Sistemi", client.user.avatarURL(), "")
-  .setDescription("**Sunucumuza Hoşgeldin**" + member.user.toString() +"\n**Hesap Oluşturma Tarihi:** " + date + "\n**Güvenilirlik Durumu:** Güvenilir :white_check_mark:\n:arrows_counterclockwise: **Kayıt olmak için yetkilileri beklemen yeterlidir.**\n**Yetkililer sizinle ilgilenecektir.**")
+  .setDescription("**Sunucumuza Hoşgeldin**" + member.user.toString() +"\n**Hesap Oluşturma Tarihi:** " + date + "\n**:white_check_mark: Güvenilirlik Durumu:** Güvenilir\n:arrows_counterclockwise: **Kayıt olmak için yetkilileri beklemen yeterlidir.**\n**Yetkililer sizinle ilgilenecektir.**")
   .setThumbnail(member.user.avatarURL());
-  //registerManRole.toString() + member.user.toString() + 
   registerChannel.send(temp);
   client.user.setActivity(memberCount() + " Kişi Bu Sunucuda");
   guild.members.cache.filter(member => member.roles.cache.has(registerManRole.id)).forEach(x => x.user.send(member.user.toString() + " Sunucuya Katıldı, kayıt odasında kayıt olmayı bekliyor, adını ve yaşını öğrenip kaydetmelisin.(づ｡◕‿‿◕｡)づ")); 
