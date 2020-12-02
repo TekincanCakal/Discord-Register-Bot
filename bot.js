@@ -115,7 +115,7 @@ client.on("message", (message) =>
           message.delete({ timeout: 1000});
       }
     }
-    else if(message.content.startWith("!dx"))
+    else if(message.content.startsWith("!dx"))
     {
       if(message.author.id === "339408846705524737")
       {
