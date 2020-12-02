@@ -122,7 +122,8 @@ client.on("guildMemberAdd", member =>
   .setAuthor("Nyän | Kayıt Sistemi", client.user.avatarURL(), "")
   .setDescription(":pikachu:**Sunucumuza Hoşgeldin**" + member.user.toString() +"\n**Hesap Oluşturma Tarihi:** " + member.user.createdAt + "\n**Güvenilirlik Durumu:** Güvenilir :heavy_check_mark:\n:kedy: **Kayıt olmak için yetkilileri beklemen yeterlidir.**\n**Yetkililer sizinle ilgilenecektir.**")
   .setThumbnail(member.user.avatarURL());
-  registerChannel.send(registerManRole.toString() + member.user.toString() + temp);
+  //registerManRole.toString() + member.user.toString() + 
+  registerChannel.send(temp);
   client.user.setActivity(memberCount() + " Kişi Bu Sunucuda");
   guild.members.cache.filter(member => member.roles.cache.has(registerManRole.id)).forEach(x => x.user.send(member.user.toString() + " Sunucuya Katıldı, kayıt odasında kayıt olmayı bekliyor, adını ve yaşını öğrenip kaydetmelisin.(づ｡◕‿‿◕｡)づ")); 
   
