@@ -68,8 +68,7 @@ client.on("message", (message) =>
               .setTitle("Kayıt Tamamlandı")
               .setDescription(":pencil2:**Kayıt Edilen Kullanıcı:**" + taggedUser.user.toString() + "\n:gift: **Verilen Rol:**" + roleString + "\n:new: **Yeni İsim:** " + username + "\n:crossed_swords: **Kaydeden Yetkili: **" + message.author.toString())
               .setThumbnail(taggedUser.user.avatarURL())
-              .setTimestamp()
-              .setFooter("", client.user.avatarURL());
+              .setTimestamp();
               registerChannel.send(temp);
               message.delete({ timeout: 100});
             }
