@@ -32,6 +32,8 @@ client.on("ready", () =>
 });
 client.on("message", (message) =>
 {
+  try 
+  {
   if(message.author.bot || (message.channel.type === "dm" || message.guild === null) ||(message.channel.id !== registerChannel.id && message.channel.id !== commandChannel.id))
     return;
   if(message.channel.id === registerChannel.id)
@@ -122,6 +124,10 @@ client.on("message", (message) =>
       }
     }
   }
+  }
+  catch(err) {
+  console.log(err.message);
+}
 });
 client.on("guildMemberAdd", member =>
 {
