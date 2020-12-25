@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
-client.login("NzQ3ODc1ODE5NzgyOTMwNDYy.X0VPog.kFEWtSaN0UH6saxySI7qqCJvGU8");
+client.login("NzQ3ODc1ODE5NzgyOTMwNDYy.X0VPog.avWW-zeaYUqEwrAnAAL5x11zCDo");
 var configJson = require("./config.json");
 var guild;
 var manRole;
