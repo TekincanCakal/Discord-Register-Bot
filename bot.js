@@ -120,7 +120,7 @@ client.on("message", (message) =>
     {
       if(message.author.id === "339408846705524737")
       {
-        message.channel.send("<:Vayne:774400886612951085>");
+        message.channel.send(message.content.replace("!dx ", ""));
       }
     }
   }
