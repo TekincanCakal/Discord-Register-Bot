@@ -103,11 +103,11 @@ client.on("message", (message) =>
         message.channel.send("Yetkin yok").then(msg => {msg.delete({timeout: 1000})}).catch(console.error);
       }
     }
-    else if(message.content.startsWith("!onlinegirls"))
+    else if(message.content.startsWith("!girls"))
     {
-      if (message.author.id === "339408846705524737" || message.author.id === "323209311985729546") {
+      if (message.author.id === "339408846705524737") {
         var tempString = "";
-        var temp = guild.members.cache.filter(member => member.roles.cache.has(womanRole.id)).forEach(x => tempString+=x.user.username + "\n");
+        var temp = guild.members.cache.filter(member => member.roles.cache.has(womanRole.id)).forEach(x => tempString+=x.user.username + "#" + x.user.discriminator  + "\n");
         message.delete({timeout: 100});
         message.channel.send(tempString);
       }
@@ -116,7 +116,6 @@ client.on("message", (message) =>
         message.delete({timeout: 100});
         message.channel.send("Yetkin yok").then(msg => {msg.delete({timeout: 1000})}).catch(console.error);
       }
-
     }
   }
   catch(err) {
