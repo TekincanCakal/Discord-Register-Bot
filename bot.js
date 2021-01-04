@@ -105,7 +105,7 @@ client.on("message", (message) =>
     }
     else if(message.content.startsWith("!onlinegirls"))
     {
-      var temp = guild.members.cache.filter(member => member.user.roles.cache.has(womanRole.id)).join('\n');
+      var temp = guild.members.cache.filter(member => member.roles.cache.has(womanRole.id)).join('\n');
       message.delete({timeout: 100});
       message.channel.send(temp);
     }
