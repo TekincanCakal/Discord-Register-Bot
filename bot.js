@@ -6,6 +6,7 @@ var guild;
 var manRole;
 var womanRole;
 var unregisterRole;
+var registerRole;
 var registerManRole;
 var registerChannel;
 
@@ -15,6 +16,7 @@ function loadConfig()
   manRole = guild.roles.cache.get(configJson.ManRole);
   womanRole = guild.roles.cache.get(configJson.WomanRole);
   unregisterRole = guild.roles.cache.get(configJson.UnregisterRole);
+  registerRole = guild.roles.cache.get(configJson.RegisterRole);
   registerManRole = guild.roles.cache.get(configJson.RegisterManRole);
   registerChannel = guild.channels.cache.get(configJson.RegisterChannel);
   commandChannel = guild.channels.cache.get(configJson.CommandChannel);
@@ -43,16 +45,14 @@ client.on("message", (message) =>
     {
       if(message.member.hasPermission("MANAGE_ROLES"))
       {
-        if(args.length === 4)
+        if(args.length === 2)
         {
           if(message.mentions.users.size === 1)
           {
             const taggedUser = guild.members.cache.get(message.mentions.users.first().id);
             if(!(taggedUser.roles.cache.has(manRole.id) || taggedUser.roles.cache.has(womanRole.id)))
             {
-              var username = args[2] + " | " + args[3];
               var roleString = "";
-              taggedUser.setNickname(username);
               if(args[0] === configJson.Prefix + configJson.ManRegisterCommand)
               {
                 taggedUser.roles.add(manRole).catch(console.error);
@@ -64,11 +64,12 @@ client.on("message", (message) =>
                 roleString = womanRole.toString();
               }
               taggedUser.roles.remove(unregisterRole).catch(console.error);
+              taggedUser.roles.add(registerRole).catch(console.error);
               const temp = new Discord.MessageEmbed()
               .setColor('#000000')
               .setAuthor("Nyän | Kayıt Sistemi", client.user.avatarURL(), "")
               .setTitle("Kayıt Tamamlandı")
-              .setDescription(":sparkles:**Kayıt Edilen Kullanıcı:**" + taggedUser.user.toString() + "\n:boom: **Verilen Rol:**" + roleString + "\n:new: **Yeni İsim:** " + username + "\n:rice_ball: **Kayıt Eden Yetkili: **" + message.author.toString())
+              .setDescription(":sparkles:**Kayıt Edilen Kullanıcı:**" + taggedUser.user.toString() + "\n:boom: **Verilen Rol:**" + roleString + "\n:rice_ball: **Kayıt Eden Yetkili: **" + message.author.toString())
               .setThumbnail(taggedUser.user.avatarURL())
               .setTimestamp();
               registerChannel.send(temp);
@@ -88,7 +89,7 @@ client.on("message", (message) =>
         }
          else
           {
-            message.reply(configJson.Prefix + configJson.ManRegisterCommand + "/" + configJson.WomanRegisterCommand + "@kişi isim yaş").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
+            message.reply(configJson.Prefix + configJson.ManRegisterCommand + "/" + configJson.WomanRegisterCommand + "@kişi").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
             message.delete({ timeout: 1000});
           }
       }
@@ -137,7 +138,7 @@ client.on("guildMemberAdd", member =>
   const temp = new Discord.MessageEmbed()
  .setColor('#000000')
  .setAuthor("Nyän | Kayıt Sistemi", client.user.avatarURL(), "")
- .setDescription("<:kedy:784386078949769218> **Sunucumuza Hoşgeldin**" + member.user.toString() +"\n:date: **Hesap Oluşturma Tarihi:** " + date + "\n**:white_check_mark: Güvenilirlik Durumu:** Güvenilir\n:cherry_blossom: "+womanRole.toString()+" için teyit zorunludur\n:stars: **Kayıt olmak için yetkilileri beklemen yeterlidir.**\n**Yetkililer sizinle ilgilenecektir.**")
+ .setDescription("<:kedy:784386078949769218> **Sunucumuza Hoşgeldin**" + member.user.toString() +"\n:date: **Hesap Oluşturma Tarihi:** " + date + "\n**:white_check_mark: Güvenilirlik Durumu:** Güvenilir\n:cherry_blossom: Kayıt için teyit zorunludur\n:stars: **Kayıt olmak için yetkilileri beklemen yeterlidir.**\n**Yetkililer sizinle ilgilenecektir.**")
  .setThumbnail(member.user.avatarURL());
   registerChannel.send(temp);
   client.user.setActivity(memberCount() + " Kişi Bu Sunucuda");
