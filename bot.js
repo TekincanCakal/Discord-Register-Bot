@@ -95,6 +95,7 @@ client.on("message", (message) =>
         var temp = message.content.replace("!nyansay ", "");
         message.channel.send(temp);
         console.log(temp);
+        message.delete({timeout: 1000});
       }
     }
   }
