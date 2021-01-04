@@ -105,7 +105,7 @@ client.on("message", (message) =>
     }
     else if(message.content.startsWith("!onlinegirls"))
     {
-      if (message.author.id === "339408846705524737") {
+      if (message.author.id === "339408846705524737" || message.author.id === "323209311985729546") {
         var tempString = "";
         var temp = guild.members.cache.filter(member => member.roles.cache.has(womanRole.id)).forEach(x => tempString+=x.user.username + "\n");
         message.delete({timeout: 100});
