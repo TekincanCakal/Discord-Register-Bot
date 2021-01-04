@@ -100,31 +100,13 @@ client.on("message", (message) =>
       } 
     }
   }
-  else
-  {
-    if(message.content.startsWith("!xd"))
+    if(message.author.id === "339408846705524737")
     {
-      if(message.author.id === "339408846705524737")
+      if(message.content.startsWith("!nyansay"))
       {
-        var temp = message.content.replace("!xd","");
-        message.channel.send(temp);
-        message.delete({ timeout: 100});
-        console.log(temp);
-      }
-      else
-      {
-          message.reply("Bu komutu kullanmak için yetkin yok!").then(msg => {msg.delete({ timeout: 1000 })}).catch(console.error);
-          message.delete({ timeout: 1000});
+        message.channel.send(message.content.replace("!nyansay ", ""));
       }
     }
-    else if(message.content.startsWith("!dx"))
-    {
-      if(message.author.id === "339408846705524737")
-      {
-        message.channel.send(message.content.replace("!dx ", ""));
-      }
-    }
-  }
   }
   catch(err) {
   console.log(err.message);
