@@ -104,7 +104,9 @@ client.on("message", (message) =>
     {
       if(message.content.startsWith("!nyansay"))
       {
-        message.channel.send(message.content.replace("!nyansay ", ""));
+        var temp = message.content.replace("!nyansay ", "");
+        message.channel.send(temp);
+        console.log(temp);
       }
     }
   }
