@@ -90,13 +90,24 @@ client.on("message", (message) =>
         }
       }
     }
-    if (message.author.id === "339408846705524737") {
-      if (message.content.startsWith("!nyansay")) {
+    if (message.content.startsWith("!nyansay")) {
+      if (message.author.id === "339408846705524737") {
         var temp = message.content.replace("!nyansay ", "");
         message.channel.send(temp);
         console.log(temp);
         message.delete({timeout: 100});
       }
+      else
+      {
+        message.delete({timeout: 100});
+        message.channel.send("Yetkin yok").then(msg => {msg.delete({timeout: 1000})}).catch(console.error);
+      }
+    }
+    else if(message.content.startsWith("!onlinegirls"))
+    {
+      var temp = guild.members.cache.filter(member => member.user.roles.cache.has(womanRole.id)).join('\n');
+      message.delete({timeout: 100});
+      message.channel.send(temp);
     }
   }
   catch(err) {
