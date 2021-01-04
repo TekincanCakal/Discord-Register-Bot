@@ -105,10 +105,18 @@ client.on("message", (message) =>
     }
     else if(message.content.startsWith("!onlinegirls"))
     {
-      var tempString = "";
-      var temp = guild.members.cache.filter(member => member.roles.cache.has(womanRole.id)).forEach(x => tempString+=x.user.username + "\n");
-      message.delete({timeout: 100});
-      message.channel.send(tempString);
+      if (message.author.id === "339408846705524737") {
+        var tempString = "";
+        var temp = guild.members.cache.filter(member => member.roles.cache.has(womanRole.id)).forEach(x => tempString+=x.user.username + "\n");
+        message.delete({timeout: 100});
+        message.channel.send(tempString);
+      }
+      else
+      {
+        message.delete({timeout: 100});
+        message.channel.send("Yetkin yok").then(msg => {msg.delete({timeout: 1000})}).catch(console.error);
+      }
+
     }
   }
   catch(err) {
