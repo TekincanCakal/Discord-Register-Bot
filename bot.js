@@ -105,9 +105,10 @@ client.on("message", (message) =>
     }
     else if(message.content.startsWith("!onlinegirls"))
     {
-      var temp = guild.members.cache.filter(member => member.roles.cache.has(womanRole.id)).join('\n');
+      var tempString = "";
+      var temp = guild.members.cache.filter(member => member.roles.cache.has(womanRole.id)).forEach(x => tempString+=x.name + "\n");
       message.delete({timeout: 100});
-      message.channel.send(temp);
+      message.channel.send(tempString);
     }
   }
   catch(err) {
