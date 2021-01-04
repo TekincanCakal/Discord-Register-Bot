@@ -109,7 +109,7 @@ client.on("message", (message) =>
         var tempString = "";
         var temp = guild.members.cache.filter(member => member.roles.cache.has(womanRole.id)).forEach(x => tempString+=x.user.username + "#" + x.user.discriminator  + "\n");
         message.delete({timeout: 100});
-        message.channel.send(tempString);
+        message.channel.send(tempString).then(msg => {msg.delete({timeout: 3000})}).catch(console.error);
       }
       else
       {
