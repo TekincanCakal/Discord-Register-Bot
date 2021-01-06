@@ -38,7 +38,7 @@ client.on("message", (message) =>
     if (message.author.bot || (message.channel.type === "dm" || message.guild === null))
       return;
     if (message.channel.id === registerChannel.id) {
-      var args = message.content.split(" ");
+      var args = message.content.trim().split(" ");
       if (args[0] === configJson.Prefix + configJson.ManRegisterCommand || args[0] === configJson.Prefix + configJson.WomanRegisterCommand) {
         if (message.member.hasPermission("MANAGE_ROLES")) {
           if (args.length === 2) {
