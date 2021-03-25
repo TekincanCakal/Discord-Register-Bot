@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
-//client.login("NzQ3ODc1ODE5NzgyOTMwNDYy.X0VPog.avWW-zeaYUqEwrAnAAL5x11zCDo");
+client.login("TOKEN");
 var configJson = require("./config.json");
 var guild;
 var manRole;
@@ -9,9 +9,11 @@ var unregisterRole;
 var registerRole;
 var registerManRole;
 var registerChannel;
+var guildId;
 
 function loadConfig()
-{  
+{
+  guildId = configJson.GuildId;
   client.user.setUsername(configJson.BotName);
   manRole = guild.roles.cache.get(configJson.ManRole);
   womanRole = guild.roles.cache.get(configJson.WomanRole);
@@ -23,14 +25,14 @@ function loadConfig()
 }
 function memberCount()
 {
-   return guild.members.cache.filter(member => !member.user.bot).size; 
+   return guild.members.cache.filter(member => !member.user.bot).size;
 }
 client.on("ready", () =>
 {
-  guild = client.guilds.cache.get("773638840002543618");
+  guild = client.guilds.cache.get(guildId);
   loadConfig();
   console.log(configJson.BotName + " Bot Enabled!");
-  client.user.setActivity(memberCount() + " Kişi Bu Sunucuda"); 
+  client.user.setActivity(memberCount() + " Kişi Bu Sunucuda");
 });
 client.on("message", (message) =>
 {
@@ -57,7 +59,7 @@ client.on("message", (message) =>
                 taggedUser.roles.add(registerRole).catch(console.error);
                 const temp = new Discord.MessageEmbed()
                     .setColor('#000000')
-                    .setAuthor("Nyän | Kayıt Sistemi", client.user.avatarURL(), "")
+                    .setAuthor("Bot | Kayıt Sistemi", client.user.avatarURL(), "")
                     .setTitle("Kayıt Tamamlandı")
                     .setDescription(":sparkles:**Kayıt Edilen Kullanıcı:**" + taggedUser.user.toString() + "\n:boom: **Verilen Rol:**" + roleString + "\n:rice_ball: **Kayıt Eden Yetkili: **" + message.author.toString())
                     .setThumbnail(taggedUser.user.avatarURL())
@@ -90,33 +92,6 @@ client.on("message", (message) =>
         }
       }
     }
-    if (message.content.startsWith("!nyansay")) {
-      if (message.author.id === "339408846705524737") {
-        var temp = message.content.replace("!nyansay ", "");
-        message.channel.send(temp);
-        console.log(temp);
-        message.delete({timeout: 100});
-      }
-      else
-      {
-        message.delete({timeout: 100});
-        message.channel.send("Yetkin yok").then(msg => {msg.delete({timeout: 1000})}).catch(console.error);
-      }
-    }
-    else if(message.content.startsWith("!girls"))
-    {
-      if (message.author.id === "339408846705524737") {
-        var tempString = "";
-        var temp = guild.members.cache.filter(member => member.roles.cache.has(womanRole.id)).forEach(x => tempString+=x.user.username + "#" + x.user.discriminator  + "\n");
-        message.delete({timeout: 100});
-        message.channel.send(tempString).then(msg => {msg.delete({timeout: 3000})}).catch(console.error);
-      }
-      else
-      {
-        message.delete({timeout: 100});
-        message.channel.send("Yetkin yok").then(msg => {msg.delete({timeout: 1000})}).catch(console.error);
-      }
-    }
   }
   catch(err) {
   console.log(err.message);
@@ -129,15 +104,15 @@ client.on("guildMemberAdd", member =>
   registerChannel.send(registerManRole.toString() + member.user.toString());
   const temp = new Discord.MessageEmbed()
  .setColor('#000000')
- .setAuthor("Nyän | Kayıt Sistemi", client.user.avatarURL(), "")
- .setDescription("<:kedy:794319006068113408> **Sunucumuza Hoşgeldin**" + member.user.toString() +"\n:date: **Hesap Oluşturma Tarihi:** " + date + "\n**:white_check_mark: Güvenilirlik Durumu:** Güvenilir\n:cherry_blossom: Kayıt için teyit zorunludur\n:stars: **Kayıt olmak için yetkilileri beklemen yeterlidir.**\n**Yetkililer sizinle ilgilenecektir.**")
+ .setAuthor("Bot | Kayıt Sistemi", client.user.avatarURL(), "")
+ .setDescription("**Sunucumuza Hoşgeldin**" + member.user.toString() +"\n:date: **Hesap Oluşturma Tarihi:** " + date + "\n**:white_check_mark: Güvenilirlik Durumu:** Güvenilir\n:cherry_blossom: Kayıt için teyit zorunludur\n:stars: **Kayıt olmak için yetkilileri beklemen yeterlidir.**\n**Yetkililer sizinle ilgilenecektir.**")
  .setThumbnail(member.user.avatarURL());
   registerChannel.send(temp);
   client.user.setActivity(memberCount() + " Kişi Bu Sunucuda");
-  guild.members.cache.filter(member => member.roles.cache.has(registerManRole.id)).forEach(x => x.user.send(member.user.toString() + " Sunucuya Katıldı, kayıt odasında kayıt olmayı bekliyor, adını ve yaşını öğrenip kaydetmelisin.(づ｡◕‿‿◕｡)づ")); 
-  
+  guild.members.cache.filter(member => member.roles.cache.has(registerManRole.id)).forEach(x => x.user.send(member.user.toString() + " Sunucuya Katıldı, kayıt odasında kayıt olmayı bekliyor, adını ve yaşını öğrenip kaydetmelisin.(づ｡◕‿‿◕｡)づ"));
+
 });
-client.on("guildMemberRemove", member => 
+client.on("guildMemberRemove", member =>
 {
-  client.user.setActivity(memberCount() + " Kişi Bu Sunucuda"); 
+  client.user.setActivity(memberCount() + " Kişi Bu Sunucuda");
 });

@@ -1,5 +1,5 @@
 {
-   "BotName":"Nyän | Register",
+   "BotName":"Kayıt Botu",
    "Prefix":"!",
    "ManRole":"773852113477435393",
    "WomanRole":"773852330159243274",
@@ -9,5 +9,6 @@
    "RegisterChannel":"787545298527846431",
    "CommandChannel":"787557799558119444",
    "ManRegisterCommand":"e",
-   "WomanRegisterCommand":"k"
+   "WomanRegisterCommand":"k",
+   "GuildId": "1231231231123",
 }
